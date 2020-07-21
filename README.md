@@ -3,6 +3,20 @@ Mediawiki extension based on BlogPage with different features and no dependencie
 
 I created SimpleBlogPage to fix some problems I had with BlogPage. It is based on BlogPage version 2.9.0 and differs in several respects:
 
+# How to install
+
+- Download and place the entire SimpleBlogPage directory in a directory called SimpleBlogPage in your extensions/ folder.
+
+- Add the following code at the bottom of your LocalSettings.php:
+
+```php
+require_once "$IP/extensions/SimpleBlogPage/SimpleBlogPage.php";
+```
+
+- Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
+
+# Information
+
 Major changes:
 
 - Got rid of dependencies on SocialProfile, VoteNY and Comments. So this extension has NO dependencies!
