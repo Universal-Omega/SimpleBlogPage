@@ -1,5 +1,5 @@
 # SimpleBlogPage
-Mediawiki extension based on BlogPage with different features &#x26;amp; no dependencies
+Mediawiki extension based on BlogPage with different features and no dependencies
 
 I created SimpleBlogPage to fix some problems I had with BlogPage. It is based on BlogPage version 2.9.0 and differs in several respects:
 
