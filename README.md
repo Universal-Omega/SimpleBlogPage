@@ -51,3 +51,5 @@ Bug fixes:
 - Got rid of duplicate categories bottom bar
 
 Protip: https://validator.w3.org/ is a very useful tool for finding mismatched &#x3C;div&#x3E; and &#x3C;/div&#x3E; tags. 
+
+Btw, I haven't audited this code for security. In general, I would highly recommend against running PHP code on a public facing server. It's probably fine to run this (and mediawiki) on your local intranet disconnected from the internet (e.g. put it on a separate VLAN). 
