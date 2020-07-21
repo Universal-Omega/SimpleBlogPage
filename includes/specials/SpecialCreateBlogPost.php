@@ -254,7 +254,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 * @return string HTML
 	 */
 	public function displayFormPageCategories() {
-		$cloud = new BlogTagCloud( 20 );
+		$cloud = new BlogTagCloud( 1000 );
 
 		$tagcloud = '<div id="create-tagcloud">';
 		$tagnumber = 0;
