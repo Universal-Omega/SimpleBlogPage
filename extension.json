@@ -1,0 +1,110 @@
+{
+	"name": "SimpleBlogPage",
+	"version": "2.9.0",
+	"author": [
+		"David Pean",
+		"Jack Phoenix",
+		"1f604"
+	],
+	"license-name": "GPL-3.0",
+	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
+	"descriptionmsg": "blogpage-desc",
+	"requires": {
+		"MediaWiki": "== 1.34.0"
+	},
+	"type": "other",
+	"namespaces": [
+		{
+			"id": 500,
+			"constant": "NS_BLOG",
+			"name": "Blog",
+			"protection": "edit"
+		},
+		{
+			"id": 501,
+			"constant": "NS_BLOG_TALK",
+			"name": "Blog_talk"
+		}
+	],
+	"config": {
+		"SimpleBlogPageDisplay": {
+			"leftcolumn": true,
+			"rightcolumn": true,
+			"author": true,
+			"author_articles": true,
+			"recent_editors": true,
+			"recent_voters": true,
+			"popular_articles": true,
+			"in_the_news": true,
+			"comments_of_day": false,
+			"games": true,
+			"new_articles": true
+		},
+		"UserProfileDisplay": {
+			"articles": true
+		}
+	},
+	"AutoloadClasses": {
+		"SimpleBlogPage": "includes/SimpleBlogPage.class.php",
+		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
+		"BlogTagCloud": "includes/BlogTagCloud.class.php",
+		"SpecialCreateBlogPost": "includes/specials/SpecialCreateBlogPost.php",
+		"SimpleBlogPageHooks": "includes/SimpleBlogPage.hooks.php"
+	},
+	"AvailableRights": [
+		"createblogpost"
+	],
+	"ExtensionMessagesFiles": {
+		"SimpleBlogPageAlias": "includes/SimpleBlogPage.alias.php",
+		"SimpleBlogPageNamespaces": "includes/SimpleBlogPage.namespaces.php"
+	},
+	"GroupPermissions": {
+		"*": {
+			"createblogpost": false
+		},
+		"user": {
+			"createblogpost": true
+		}
+	},
+	"Hooks": {
+		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
+		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage",
+		"CanonicalNamespaces": "SimpleBlogPageHooks::onCanonicalNamespaces"
+	},
+	"MessagesDirs": {
+		"SimpleBlogPage": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.blogPage": {
+			"styles": ["resources/css/ext.blogpage.blogpage.css", "resources/css/ext.blogpage.hideContentsub.css"]
+		},
+		"ext.blogPage.articlesHome": {
+			"styles": ["resources/css/ext.blogpage.articleshome.css", "resources/css/ext.blogpage.hideContentsub.css"]
+		},
+		"ext.blogPage.create.css": {
+			"styles": "resources/css/ext.blogpage.createblogpost.css"
+		},
+		"ext.blogPage.create.js": {
+			"scripts": "resources/js/ext.blogpage.createblogpost.js",
+			"messages": [
+				"blog-js-create-error-need-content",
+				"blog-js-create-error-need-title",
+				"blog-js-create-error-page-exists"
+			],
+			"dependencies": [
+				"mediawiki.api"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "SimpleBlogPage"
+	},
+	"SpecialPages": {
+		"ArticlesHome": "ArticlesHome",
+		"CreateBlogPost": "SpecialCreateBlogPost"
+	},
+	"manifest_version": 1
+}
