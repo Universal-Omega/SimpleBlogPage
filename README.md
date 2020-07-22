@@ -64,6 +64,11 @@ Bug fixes:
 - Fixed misspelling of &#x201C;cahce&#x201D; to &#x201C;cache&#x201D;, which was a critical bug that was breaking homepage. Then I removed cache completely. 
 - Got rid of duplicate categories bottom bar
 
+Misc:
+
+- Got rid of/factored out most of the duplicated code (and there was quite a lot of it). 
+- Changed the getAuthors function to grab the author out of the basetext (root of subpage) rather than parsing it out of categories using some hacky regex. 
+
 Protip: https://validator.w3.org/ is a very useful tool for finding mismatched &#x3C;div&#x3E; and &#x3C;/div&#x3E; tags. 
 
 Btw, I haven't audited this code for security. In general, I would highly recommend against running PHP code on a public facing server. It's probably fine to run this (and mediawiki) on your local intranet disconnected from the internet (e.g. put it on a separate VLAN). 
