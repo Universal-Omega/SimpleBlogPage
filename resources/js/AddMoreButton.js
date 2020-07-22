@@ -38,7 +38,28 @@ var addMoreButton = function () {
             }
         }
     } );
-    console.log("Syntax Highlight Button Loaded.");
+    console.log("Add Syntax Highlight Button Loaded.");
+    $( '#wpTextbox1' ).wikiEditor( 'addToToolbar', {
+        section: 'advanced',
+        group: 'format',
+        tools: {
+            buttonId: {
+                label: 'Insert quotation',
+                type: 'button',
+		icon: 'extensions/SimpleBlogPage/resources/images/btn_quote.png',
+                action: {
+                    type: 'encapsulate',
+                    options: {
+                        pre: '<div style="background-color: #ddf5eb; border-style: dotted;">\n',
+                        peri: 'insert quotation here',
+                        post: '\n</div>'
+                    }
+                }
+            }
+        }
+    } );
+    console.log("Add Quote Button Loaded.");
+    console.log("Credits for quote button icon due to Juxn, licensed under GPL v2. Juxn is a freelanced designer from Germany with a degree in visual communication.");
 };
 
 /* Check if view is in edit mode and that the required modules are available. Then, customize the toolbar … */
