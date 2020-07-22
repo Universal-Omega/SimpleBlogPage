@@ -42,7 +42,7 @@ var addMoreButton = function () {
 };
 
 /* Check if view is in edit mode and that the required modules are available. Then, customize the toolbar … */
-if ( [ 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
+if ( [ 'view', 'edit', 'submit' ].indexOf( mw.config.get( 'wgAction' ) ) !== -1 ) {
 	mw.loader.using( 'user.options' ).then( function () {
 		// This can be the string "0" if the user disabled the preference ([[phab:T54542#555387]])
 		if ( mw.user.options.get( 'usebetatoolbar' ) == 1 ) {

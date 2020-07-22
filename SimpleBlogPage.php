@@ -12,7 +12,7 @@ $wgNamespacesWithSubpages[501] = true;
 //$wgUseSiteJs = true;
 
 //uncomment these
-$wgResourceModules['ext.AddMoreButton']['scripts'][] = 'extensions/SimpleBlogPage/js/AddMoreButton.js';
+$wgResourceModules['ext.AddMoreButton']['scripts'][] = 'extensions/SimpleBlogPage/resources/js/AddMoreButton.js';
 $wgHooks['EditPage::showEditForm:initial'][] = 'addModule';
 
 function addModule(EditPage $editPage, OutputPage $output ) {

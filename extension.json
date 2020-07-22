@@ -10,7 +10,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
 	"descriptionmsg": "blogpage-desc",
 	"requires": {
-		"MediaWiki": "== 1.34.0"
+		"MediaWiki": ">= 1.34.0"
 	},
 	"type": "other",
 	"namespaces": [
@@ -87,7 +87,7 @@
 			"styles": "resources/css/ext.blogpage.createblogpost.css"
 		},
 		"ext.blogPage.create.js": {
-			"scripts": "resources/js/ext.blogpage.createblogpost.js",
+			"scripts": ["resources/js/ext.blogpage.createblogpost.js", "resources/js/AddMoreButton.js"],
 			"messages": [
 				"blog-js-create-error-need-content",
 				"blog-js-create-error-need-title",
