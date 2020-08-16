@@ -29,7 +29,7 @@ Features added:
 - Added button to the WikiEditor toolbar to insert the &#x3C;!--more--&#x3E; tag. I drew the logo myself from scratch, pixel by pixel, so there are no copyright/licensing issues. Obviously, you&#x27;ll only see the button if you actually have the WikiEditor extension enabled. 
 - Added button to add syntax highlighting (the icon for which I again drew from scratch, to avoid licensing issues), which is a poor man&#x27;s substitute for CodeEditor which I just can&#x27;t seem to get working on my setup. 
 - Added "insert quotation" button. Copyright for the icon belongs to Juxn (it's licensed under GPL v2). 
-- Added "insert comment" button. Copyright for the icon belongs to Juxn under GPL. The insert comment button generates a colored comment based on your username, it will say "[username]'s notes:" and the color is random but deterministic which means each user will have a different colored comment. 
+- Added "insert comment" button. Copyright for the icon belongs to Juxn under GPL. The insert comment button generates a colored comment based on your username, it will say "[username]'s notes:" and the color is deterministically generated from a hash of the user's username which means each user will have a different colored comment. 
 - Added the author name to the &#x22;created&#x22; line under every listed blog post.
 - Added the word count next to the blog post title.
 
