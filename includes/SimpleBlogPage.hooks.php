@@ -86,7 +86,7 @@ class SimpleBlogPageHooks {
 	
 	
 	
-	function onEditPageshowEditForminitial(EditPage $editPage, OutputPage $output ) {
+	public static function onEditPageshowEditForminitial(EditPage $editPage, OutputPage $output ) {
 		$output->addModules( 'ext.AddMoreButton' );
 	}
 }
