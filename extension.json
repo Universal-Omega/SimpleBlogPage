@@ -102,7 +102,7 @@
 		},
 		"ext.AddMoreButton": {
 			"scripts": "resources/js/AddMoreButton.js"
-		},
+		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
