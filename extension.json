@@ -18,12 +18,14 @@
 			"id": 500,
 			"constant": "NS_BLOG",
 			"name": "Blog",
-			"protection": "edit"
+			"protection": "edit",
+			"subpages": true
 		},
 		{
 			"id": 501,
 			"constant": "NS_BLOG_TALK",
-			"name": "Blog_talk"
+			"name": "Blog_talk",
+			"subpages": true
 		}
 	],
 	"config": {
@@ -69,7 +71,8 @@
 	"Hooks": {
 		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
 		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage",
-		"CanonicalNamespaces": "SimpleBlogPageHooks::onCanonicalNamespaces"
+		"CanonicalNamespaces": "SimpleBlogPageHooks::onCanonicalNamespaces",
+		"EditPage::showEditForm:initial": "SimpleBlogPageHooks::onEditPageshowEditForminitial"
 	},
 	"MessagesDirs": {
 		"SimpleBlogPage": [
@@ -96,7 +99,10 @@
 			"dependencies": [
 				"mediawiki.api"
 			]
-		}
+		},
+		"ext.AddMoreButton": {
+			"scripts": "resources/js/AddMoreButton.js"
+		},
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
