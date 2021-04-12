@@ -83,5 +83,10 @@ class SimpleBlogPageHooks {
 		$list[NS_BLOG] = 'Blog';
 		$list[NS_BLOG_TALK] = 'Blog_talk';
 	}
-
+	
+	
+	
+	public static function onEditPageshowEditForminitial(EditPage $editPage, OutputPage $output ) {
+		$output->addModules( 'ext.AddMoreButton' );
+	}
 }
