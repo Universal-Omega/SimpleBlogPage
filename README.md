@@ -10,7 +10,7 @@ I created SimpleBlogPage to fix some problems I had with BlogPage. It is based o
 - Add the following code at the bottom of your LocalSettings.php:
 
 ```php
-require_once "$IP/extensions/SimpleBlogPage/SimpleBlogPage.php";
+wfLoadExtension( 'SimpleBlogPage' );
 ```
 
 - Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
@@ -21,7 +21,6 @@ Major changes:
 
 - Got rid of dependencies on SocialProfile, VoteNY and Comments. So this extension has NO dependencies!
 - SimpleBlogPage is NOT compatible with BlogPage (e.g it uses the same namespace), you MUST NOT have both extensions installed at the same time!
-- You need to install SimpleBlogPage by adding require_once &#x22;$IP/extensions/SimpleBlogPage/SimpleBlogPage.php&#x22;; in your LocalSettings.php instead of wfLoadExtension( &#x27;BlogPage&#x27; ); This is because of the switch to using subpages.
 
 Features added:
 
