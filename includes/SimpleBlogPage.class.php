@@ -66,9 +66,9 @@ class SimpleBlogPage extends Article {
 	 * Sets the 2 variables $AuthorName and $AuthorID.
 	 */
 	function getAuthor() {
-		$this->AuthorName = $this->getTitle()->getBaseText();
+		$this->AuthorName = Title::newFromText( $this->getTitle()->getText() )->getRootText();
 		$authorObj = User::newFromName( $this->AuthorName );
-		//$this->AuthorID = $authorObj->getActorId(); //DO NOT USE getActorId() here!!! IT GIVES THE WRONG ID. YOU WANT getId() INSTEAD!! 
+		// $this->AuthorID = $authorObj->getActorId(); //DO NOT USE getActorId() here!!! IT GIVES THE WRONG ID. YOU WANT getId() INSTEAD!! 
 		$this->AuthorID = $authorObj->getId();
 	}
 
@@ -235,7 +235,7 @@ class SimpleBlogPage extends Article {
 
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
-		$authorname = $this->getTitle()->getBaseText();
+		$authorname = $this->AuthorName;
 		$authors = '<a href="index.php?title=Blog:'.$authorname.'">' . $authorname . '</a>';
 		//$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
