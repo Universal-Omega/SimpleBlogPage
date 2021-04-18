@@ -37,9 +37,9 @@ class SimpleBlogPage extends Article {
 		if ( $this->getTitle()->isRedirect() ) {
 			wfDebugLog( 'SimpleBlogPage', __METHOD__ );
 
-			$target = $this->followRedirect();
+			$target = WikiPage::factory( $this->getTitle() )->followRedirect();
 			if ( !$target instanceof Title ) {
-				// Correctly handle interwiki redirects and the like
+				// Correctly handle interwiki redirects and like
 				// WikiPage::followRedirect() can return either a Title, boolean
 				// or a string! A string is returned for interwiki redirects,
 				// and the string in question is the target URL with the rdfrom
