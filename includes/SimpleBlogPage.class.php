@@ -122,14 +122,14 @@ class SimpleBlogPage extends Article {
 		// Show the user's list of blog posts when viewing Blog:Username
 		// Show the list regardless of whether the actual page exists or not
 		$exploded = explode("/", $this->getTitle()->getText());
-		if ( sizeof($exploded) < 2 ) {
-			$this::showUserPosts($user, $output);
+		if ( sizeof( $exploded ) < 2 ) {
+			$this::showUserPosts( $user, $output );
 			return '';
 		}
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
-		if ( !$this->getID() ) {
+		if ( !WikiPage::factory( $this->getTitle() )->getID() ) {
 			parent::view();
 			return '';
 		}
@@ -219,10 +219,8 @@ class SimpleBlogPage extends Article {
 
 		$count = 0;
 
-		$wikiPage = new WikiPage( $this->getTitle() );
-
 		// Get date of last edit
-		$timestamp = $wikiPage->getTimestamp();
+		$timestamp = WikiPage::factory( $this->getTitle() )->getTimestamp();
 		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
@@ -434,7 +432,4 @@ class SimpleBlogPage extends Article {
 
 		return $blurbFont . $blurbText . $morelink;
 	}
-
-
-
 }
