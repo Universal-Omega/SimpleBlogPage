@@ -34,7 +34,7 @@ class SimpleBlogPage extends Article {
 		// we have to load the text for the real page
 		// Note: If $this->getContent() is called anywhere before parent::view,
 		// the real article text won't get loaded on the page
-		if ( $this->isRedirect() ) {
+		if ( $this->getTitle()->isRedirect() ) {
 			wfDebugLog( 'SimpleBlogPage', __METHOD__ );
 
 			$target = $this->followRedirect();
