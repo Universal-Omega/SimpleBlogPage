@@ -1,6 +1,6 @@
 {
 	"name": "SimpleBlogPage",
-	"version": "2.9.0",
+	"version": "3.0.0",
 	"author": [
 		"Universal Omega",
 		"David Pean",
@@ -9,9 +9,9 @@
 	],
 	"license-name": "GPL-3.0",
 	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
-	"descriptionmsg": "blogpage-desc",
+	"descriptionmsg": "simpleblogpage-desc",
 	"requires": {
-		"MediaWiki": ">= 1.34.0"
+		"MediaWiki": ">= 1.35.0"
 	},
 	"type": "other",
 	"namespaces": [
