@@ -219,8 +219,10 @@ class SimpleBlogPage extends Article {
 
 		$count = 0;
 
+		$wikiPage = new WikiPage( $this->getTitle() );
+
 		// Get date of last edit
-		$timestamp = $this->getTimestamp();
+		$timestamp = $wikiPage->getTimestamp();
 		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
