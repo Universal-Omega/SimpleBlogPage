@@ -1,8 +1,10 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Universal Omega"
+		]
 	},
-	"blogpage-desc": "{{desc|name=SimpleBlogPage|url=https://www.mediawiki.org/wiki/Extension:SimpleBlogPage}}",
+	"simpleblogpage-desc": "{{desc|name=SimpleBlogPage|url=https://www.mediawiki.org/wiki/Extension:SimpleBlogPage}}",
 	"blog-and": "A word combination word",
 	"blog-anonymous-name": "A user name",
 	"blog-author-comments": "A list item",
