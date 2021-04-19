@@ -48,7 +48,7 @@
 	"articleshome": "All blog posts",
 	"createblogpost": "Create blog post",
 	"blog-create-rules": "-",
-	"blog-tagcloud-blacklist": "",
+	"blog-tagcloud-blacklist": "-",
 	"blog-create-category-help": "Categories help organize information on the site.",
 	"blog-create-title": "Title",
 	"blog-create-text": "Text",
