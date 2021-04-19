@@ -31,20 +31,24 @@
 	],
 	"config": {
 		"SimpleBlogPageDisplay": {
-			"leftcolumn": true,
-			"rightcolumn": true,
-			"author": true,
-			"author_articles": true,
-			"recent_editors": true,
-			"recent_voters": true,
-			"popular_articles": true,
-			"in_the_news": true,
-			"comments_of_day": false,
-			"games": true,
-			"new_articles": true
+			"value": {
+				"leftcolumn": true,
+				"rightcolumn": true,
+				"author": true,
+				"author_articles": true,
+				"recent_editors": true,
+				"recent_voters": true,
+				"popular_articles": true,
+				"in_the_news": true,
+				"comments_of_day": false,
+				"games": true,
+				"new_articles": true
+			}
 		},
 		"UserProfileDisplay": {
-			"articles": true
+			"value": {
+				"articles": true
+			}
 		}
 	},
 	"AutoloadClasses": {
@@ -82,16 +86,27 @@
 	},
 	"ResourceModules": {
 		"ext.blogPage": {
-			"styles": ["resources/css/ext.blogpage.blogpage.css", "resources/css/ext.blogpage.hideContentsub.css"]
+			"styles": [
+				"resources/css/ext.blogpage.blogpage.css",
+				"resources/css/ext.blogpage.hideContentsub.css"
+			]
 		},
 		"ext.blogPage.articlesHome": {
-			"styles": ["resources/css/ext.blogpage.articleshome.css", "resources/css/ext.blogpage.hideContentsub.css"]
+			"styles": [
+				"resources/css/ext.blogpage.articleshome.css",
+				"resources/css/ext.blogpage.hideContentsub.css"
+			]
 		},
 		"ext.blogPage.create.css": {
-			"styles": "resources/css/ext.blogpage.createblogpost.css"
+			"styles": [
+				"resources/css/ext.blogpage.createblogpost.css"
+			]
 		},
 		"ext.blogPage.create.js": {
-			"scripts": ["resources/js/ext.blogpage.createblogpost.js", "resources/js/AddMoreButton.js"],
+			"scripts": [
+				"resources/js/ext.blogpage.createblogpost.js",
+				"resources/js/AddMoreButton.js"
+			],
 			"messages": [
 				"blog-js-create-error-need-content",
 				"blog-js-create-error-need-title",
@@ -102,7 +117,9 @@
 			]
 		},
 		"ext.AddMoreButton": {
-			"scripts": "resources/js/AddMoreButton.js"
+			"scripts": [
+				"resources/js/AddMoreButton.js"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -113,5 +130,5 @@
 		"ArticlesHome": "ArticlesHome",
 		"CreateBlogPost": "SpecialCreateBlogPost"
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
