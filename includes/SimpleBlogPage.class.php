@@ -324,7 +324,7 @@ class SimpleBlogPage extends Article {
 		$content = $article->fetchRevisionRecord()->getContent(
 			SlotRecord::MAIN,
 			RevisionRecord::FOR_THIS_USER,
-			$this->getUser()
+			$this->getContext()->getUser()
 		);
 		$text = ContentHandler::getContentText( $content );
 		$wordcount = strval(str_word_count($text));
