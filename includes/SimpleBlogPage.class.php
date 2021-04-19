@@ -82,7 +82,7 @@ class SimpleBlogPage extends Article {
 
 		wfDebugLog( 'SimpleBlogPage', __METHOD__ );
 
-		// Show the user's list of blog posts when viewing Blog:Username
+		// Show the user's list of blog posts when viewing User_blog:Username
 		// Show the list regardless of whether the actual page exists or not
 		$exploded = explode("/", $this->getTitle()->getText());
 		if ( sizeof( $exploded ) < 2 ) {
@@ -199,7 +199,7 @@ class SimpleBlogPage extends Article {
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-		$authors = $linkRenderer->makeLink( Title::newFromText( $this->AuthorName, NS_BLOG ), $this->AuthorName );
+		$authors = $linkRenderer->makeLink( Title::newFromText( $this->AuthorName, NS_USER_BLOG ), $this->AuthorName );
 
 		$output .= $authors;
 
