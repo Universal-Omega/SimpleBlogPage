@@ -38,14 +38,16 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 			'type' => 'text',
 			'label-message' => 'blog-create-title',
 			'default' => $this->getRequest()->getVal( 'blogtitle' ),
-			'required' => true
+			'required' => true,
+			'cssclass' => 'createblogpost-input'
 		];
 
 		$formDescriptor['content'] = [
 			'type' => 'textarea',
 			'label-message' => 'blog-create-text',
 			'default' => $this->getRequest()->getVal( 'blogcontent' ),
-			'required' => true
+			'required' => true,
+			'cssclass' => 'createblogpost-input'
 		];
 
 		$formDescriptor['categories'] = [
@@ -53,7 +55,8 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 			'default' => [],
 			'dropdown' => true,
 			'label-message' => 'blog-create-categories',
-			'help-message' => 'blog-create-category-help'
+			'help-message' => 'blog-create-category-help',
+			'cssclass' => 'createblogpost-input'
 		];
 
 		foreach ( $cloud->tags as $tag => $att ) {
