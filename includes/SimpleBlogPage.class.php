@@ -195,9 +195,8 @@ class SimpleBlogPage extends Article {
 
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
-		$authorname = $this->AuthorName;
-		$authors = '<a href="index.php?title=Blog:'.$authorname.'">' . $authorname . '</a>';
-		//$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$authors = $linkRenderer->makeLink( Title::newFromText( $this->AuthorName, NS_BLOG ), $this->AuthorName );
 
 		$output .= $authors;
 
