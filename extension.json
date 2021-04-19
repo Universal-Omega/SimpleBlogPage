@@ -31,24 +31,20 @@
 	],
 	"config": {
 		"SimpleBlogPageDisplay": {
-			"value": {
-				"leftcolumn": true,
-				"rightcolumn": true,
-				"author": true,
-				"author_articles": true,
-				"recent_editors": true,
-				"recent_voters": true,
-				"popular_articles": true,
-				"in_the_news": true,
-				"comments_of_day": false,
-				"games": true,
-				"new_articles": true
-			}
+			"leftcolumn": true,
+			"rightcolumn": true,
+			"author": true,
+			"author_articles": true,
+			"recent_editors": true,
+			"recent_voters": true,
+			"popular_articles": true,
+			"in_the_news": true,
+			"comments_of_day": false,
+			"games": true,
+			"new_articles": true
 		},
 		"UserProfileDisplay": {
-			"value": {
-				"articles": true
-			}
+			"articles": true
 		}
 	},
 	"AutoloadClasses": {
@@ -117,5 +113,5 @@
 		"ArticlesHome": "ArticlesHome",
 		"CreateBlogPost": "SpecialCreateBlogPost"
 	},
-	"manifest_version": 2
+	"manifest_version": 1
 }
