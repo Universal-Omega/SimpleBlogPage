@@ -1,4 +1,5 @@
 <?php
+
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -51,12 +52,12 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 			$titleObj = $newestBlogPost['title'];
 			$output .= '<div class="listpages-item">';
 			$wordcount = 0;
-			$blurb = SimpleBlogPage::getBlurb(
-						$newestBlogPost['title']->getText(),
-						$newestBlogPost['ns'],
-						300,
-						$wordcount
-					);
+			$blurb = ( new SimpleBlogPage( $newestBlogPost['title'] ) )->getBlurb(
+				$newestBlogPost['title']->getText(),
+				$newestBlogPost['ns'],
+				300,
+				$wordcount
+			);
 			$wordcount = max(0, $wordcount - 10);
 			$output .= '<a href="' . htmlspecialchars( $titleObj->getFullURL() ) . '">' .
 					htmlspecialchars( $titleObj->getSubpageText() ) .
