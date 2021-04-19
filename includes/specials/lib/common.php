@@ -18,7 +18,7 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 			'page_id',
 		],
 		[
-			'page_namespace' => NS_BLOG,
+			'page_namespace' => NS_USER_BLOG,
 			'page_is_redirect' => 0,
 		],
 		__METHOD__,
@@ -31,8 +31,8 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 	$newestBlogPosts = [];
 	foreach ( $res as $row ) {
 		// only include blog posts by current user
-		$titleObj = Title::makeTitle( NS_BLOG, $row->page_title );
-		// do not include Blog:[username] pages as they are not blog posts
+		$titleObj = Title::makeTitle( NS_USER_BLOG, $row->page_title );
+		// do not include User_blog:[username] pages as they are not blog posts
 		if ( ( $includeall || $titleObj->getBaseText() === $AuthorName ) && strstr($titleObj->getText(), '/') ) { 
 			$newestBlogPosts[] = [
 				'title' => $titleObj,
@@ -64,7 +64,7 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 					'</a> [' . strval($wordcount) . 
 					' words]<div class="listpages-date">';
 			$authorOfPost = $titleObj->getBaseText();
-			$author = '<a href="index.php?title=Blog:' . $authorOfPost . '" style="font-size:10px">' . $authorOfPost . '</a>';
+			$author = '<a href="index.php?title=User_blog:' . $authorOfPost . '" style="font-size:10px">' . $authorOfPost . '</a>';
 //			$output .= 'created by ' . $author ' on ' . gmdate("Y M j D G:i:s T", strtotime( SimpleBlogPage::getCreateDate( $newestBlogPost['id'] ) ));
 			$output .= '(' .
 				wfMessage( 'blog-created-by',
