@@ -17,15 +17,15 @@
 	"namespaces": [
 		{
 			"id": 500,
-			"constant": "NS_BLOG",
-			"name": "Blog",
+			"constant": "NS_USER_BLOG",
+			"name": "User_blog",
 			"protection": "edit",
 			"subpages": true
 		},
 		{
 			"id": 501,
-			"constant": "NS_BLOG_TALK",
-			"name": "Blog_talk",
+			"constant": "NS_USER_BLOG_TALK",
+			"name": "User_blog_talk",
 			"subpages": true
 		}
 	],
