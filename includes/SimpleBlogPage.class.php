@@ -20,55 +20,15 @@ class SimpleBlogPage extends Article {
 
 	public function __construct( Title $title ) {
 		parent::__construct( $title );
-		$this->setContent();
 		$this->getAuthor();
-	}
-
-	public function setContent() {
-		// Get the page content for later use
-		$this->pageContent = ContentHandler::getContentText(
-			$this->getContentObject()
-		);
-
-		// If it's a redirect, in order to get the *real* content for later use,
-		// we have to load the text for the real page
-		// Note: If $this->getContent() is called anywhere before parent::view,
-		// the real article text won't get loaded on the page
-		if ( $this->isRedirect() ) {
-			wfDebugLog( 'SimpleBlogPage', __METHOD__ );
-
-			$target = $this->followRedirect();
-			if ( !$target instanceof Title ) {
-				// Correctly handle interwiki redirects and the like
-				// WikiPage::followRedirect() can return either a Title, boolean
-				// or a string! A string is returned for interwiki redirects,
-				// and the string in question is the target URL with the rdfrom
-				// URL parameter appended to it, which -- since it's an interwiki
-				// URL -- won't resolve to a valid local Title.
-				// Doing the redirection here is somewhat hacky, but ::getAuthors(),
-				// which is called right after this function in the constructor,
-				// attempts to read $this->pageContent...
-				// @see https://github.com/Brickimedia/brickimedia/issues/370
-				$this->getContext()->getOutput()->redirect( $target );
-			} else {
-				$rarticle = new Article( $target );
-				$rcontent = $rarticle->getContentObject();
-				$this->pageContent = ContentHandler::getContentText( $rcontent );
-
-				// If we don't clear, the page content will be [[redirect-blah]],
-				// and not the actual page
-				$this->clear();
-			}
-		}
 	}
 
 	/**
 	 * Sets the 2 variables $AuthorName and $AuthorID.
 	 */
 	function getAuthor() {
-		$this->AuthorName = $this->getTitle()->getBaseText();
-		$authorObj = User::newFromName( $this->AuthorName );
-		//$this->AuthorID = $authorObj->getActorId(); //DO NOT USE getActorId() here!!! IT GIVES THE WRONG ID. YOU WANT getId() INSTEAD!! 
+		$this->AuthorName = Title::newFromText( $this->getTitle()->getText() )->getRootText();
+		$authorObj = User::newFromName( $this->AuthorName ); 
 		$this->AuthorID = $authorObj->getId();
 	}
 
@@ -122,14 +82,14 @@ class SimpleBlogPage extends Article {
 		// Show the user's list of blog posts when viewing Blog:Username
 		// Show the list regardless of whether the actual page exists or not
 		$exploded = explode("/", $this->getTitle()->getText());
-		if ( sizeof($exploded) < 2 ) {
-			$this::showUserPosts($user, $output);
+		if ( sizeof( $exploded ) < 2 ) {
+			$this::showUserPosts( $user, $output );
 			return '';
 		}
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
-		if ( !$this->getID() ) {
+		if ( !WikiPage::factory( $this->getTitle() )->getID() ) {
 			parent::view();
 			return '';
 		}
@@ -220,14 +180,14 @@ class SimpleBlogPage extends Article {
 		$count = 0;
 
 		// Get date of last edit
-		$timestamp = $this->getTimestamp();
+		$timestamp = WikiPage::factory( $this->getTitle() )->getTimestamp();
 		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
 		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
-		$timestamp = self::getCreateDate( $this->getId() );
+		$timestamp = self::getCreateDate( WikiPage::factory( $this->getTitle() )->getID() );
 		$create_time = [];
 		$create_time['date'] = $lang->date( $timestamp, true );
 		$create_time['time'] = $lang->time( $timestamp, true );
@@ -235,9 +195,8 @@ class SimpleBlogPage extends Article {
 
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
-		$authorname = $this->getTitle()->getBaseText();
-		$authors = '<a href="index.php?title=Blog:'.$authorname.'">' . $authorname . '</a>';
-		//$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$authors = $linkRenderer->makeLink( Title::newFromText( $this->AuthorName, NS_BLOG ), $this->AuthorName );
 
 		$output .= $authors;
 
@@ -271,7 +230,7 @@ class SimpleBlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		$pageTitleId = $this->getId();
+		$pageTitleId = WikiPage::factory( $this->getTitle() )->getID();
 		$editors = [];
 
 		wfDebugLog( 'SimpleBlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
@@ -432,7 +391,4 @@ class SimpleBlogPage extends Article {
 
 		return $blurbFont . $blurbText . $morelink;
 	}
-
-
-
 }
