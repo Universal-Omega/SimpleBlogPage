@@ -1,8 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ciencia Al Poder",
-			"Universal Omega"
+			"Ciencia Al Poder"
 		]
 	},
 	"simpleblogpage-desc": "Sistema de Blog con funcionalidades de comentarios y valoraciones, [[Special:CreateBlogPost|una página especial para publicar entradas de blog]] y [[Special:ArticlesHome|una página especial para listar entradas de blog]]",
