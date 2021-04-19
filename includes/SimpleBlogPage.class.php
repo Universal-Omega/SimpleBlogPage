@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for handling the viewing of pages in the NS_BLOG namespace.
+ * Class for handling the viewing of pages in the NS_USER_BLOG namespace.
  *
  * @file
  */
