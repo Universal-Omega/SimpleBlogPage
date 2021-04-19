@@ -4,7 +4,10 @@
  *
  * @file
  */
+
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 
 require_once "specials/lib/common.php";
 
@@ -312,13 +315,17 @@ class SimpleBlogPage extends Article {
 	 * @param string $fontSize Font size; small, medium or large
 	 * @return string First $maxChars characters from the page
 	 */
-	public static function getBlurb( $pageTitle, $namespace, $maxChars, &$wordcount, $fontSize = 'small' ) {
+	public function getBlurb( $pageTitle, $namespace, $maxChars, &$wordcount, $fontSize = 'small' ) {
 		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 
 		// Get raw text
 		$title = Title::makeTitle( $namespace, $pageTitle );
 		$article = new Article( $title );
-		$content = $article->getContentObject();
+		$content = $article->fetchRevisionRecord()->getContent(
+			SlotRecord::MAIN,
+			RevisionRecord::FOR_THIS_USER,
+			$this->getUser()
+		);
 		$text = ContentHandler::getContentText( $content );
 		$wordcount = strval(str_word_count($text));
 
