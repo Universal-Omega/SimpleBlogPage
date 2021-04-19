@@ -49,7 +49,7 @@
 	"createblogpost": "Create blog post",
 	"blog-create-rules": "-",
 	"blog-tagcloud-blacklist": "",
-	"blog-create-category-help": "Categories help organize information on the site. To add multiple categories, separate them by commas.",
+	"blog-create-category-help": "Categories help organize information on the site.",
 	"blog-create-title": "Title",
 	"blog-create-text": "Text",
 	"blog-create-categories": "Categories",
