@@ -33,7 +33,9 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 		// only include blog posts by current user
 		$titleObj = Title::makeTitle( NS_BLOG, $row->page_title );
 		// do not include Blog:[username] pages as they are not blog posts
-		if ( ( $includeall || $titleObj->getBaseText() === $AuthorName ) && strstr($titleObj->getText(), '/') ) { 
+		$title = Title::newFromText( $titleObj->getText() )->getRootText();
+
+		if ( ( $includeall || $title === $AuthorName ) && strstr( $titleObj->getText(), '/' ) ) { 
 			$newestBlogPosts[] = [
 				'title' => $titleObj,
 				'ns' => $row->page_namespace,
