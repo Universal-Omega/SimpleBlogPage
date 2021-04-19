@@ -11,7 +11,7 @@ use MediaWiki\MediaWikiServices;
 class SimpleBlogPageHooks {
 
 	/**
-	 * Calls SimpleBlogPage instead of standard Article for pages in the NS_BLOG
+	 * Calls SimpleBlogPage instead of standard Article for pages in the NS_USER_BLOG
 	 * namespace.
 	 *
 	 * @param Title &$title
@@ -19,7 +19,7 @@ class SimpleBlogPageHooks {
 	 * @param RequestContext $context
 	 */
 	public static function blogFromTitle( Title &$title, &$article, $context ) {
-		if ( $title->getNamespace() == NS_BLOG ) {
+		if ( $title->getNamespace() == NS_USER_BLOG ) {
 			$out = $context->getOutput();
 			$out->enableClientCache( false );
 
@@ -32,7 +32,7 @@ class SimpleBlogPageHooks {
 
 	/**
 	 * Checks that the user is logged is, is not blocked via Special:Block and has
-	 * the 'edit' user right when they're trying to edit a page in the NS_BLOG NS.
+	 * the 'edit' user right when they're trying to edit a page in the NS_USER_BLOG NS.
 	 *
 	 * @param EditPage $editPage
 	 * @return bool True if the user should be allowed to continue, else false
@@ -48,7 +48,7 @@ class SimpleBlogPageHooks {
 		$c0 = $isnewpost ? 'true' : 'false';
 		$c1 = $isnotowner ? 'true' : 'false';
 
-		if ( $editPage->getTitle()->getNamespace() == NS_BLOG ) {
+		if ( $editPage->getTitle()->getNamespace() == NS_USER_BLOG ) {
 			if ( $user->isAnon() ) { // anons can't edit blog pages
 				if ( $isnewpost ) {
 					$output->addWikiMsg( 'blog-login' );
@@ -80,8 +80,8 @@ class SimpleBlogPageHooks {
 	 *                     canonical names
 	 */
 	public static function onCanonicalNamespaces( &$list ) {
-		$list[NS_BLOG] = 'Blog';
-		$list[NS_BLOG_TALK] = 'Blog_talk';
+		$list[NS_USER_BLOG] = 'User_blog';
+		$list[NS_USER_BLOG_TALK] = 'User_blog_talk';
 	}
 	
 	
