@@ -44,7 +44,6 @@ Potentially breaking changes:
 - CreateBlogPost has been changed to create blog posts under Blog:username/blogposttitle rather than Blog:blogposttitle. 
 - The URL Blog:[username] has been hijacked to display a list of all of the user&#x27;s posts in order of time created with the showUserPosts function 
 - Pages with titles of the form Blog:[username] are not treated as blog posts, in fact they are hidden completely and cannot be viewed normally
-- The newly created SimpleBlogPage.php enable subpages for the NS_BLOG namespace. 
 
 Quality of life improvements / pessimizations:
 

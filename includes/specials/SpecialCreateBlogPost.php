@@ -9,109 +9,132 @@
 
 use MediaWiki\MediaWikiServices;
 
-class SpecialCreateBlogPost extends SpecialPage {
-
-	public $tabCounter = 1;
-
-	/**
-	 * Constructor -- set up the new special page
-	 */
+class SpecialCreateBlogPost extends FormSpecialPage {
 	public function __construct() {
 		parent::__construct( 'CreateBlogPost', 'createblogpost' );
 	}
 
-	public function doesWrites() {
-		return true;
+	/**
+	 * @return array
+	 */
+	protected function getFormFields() {
+		$formDescriptor = [];
+		$out = $this->getOutput();
+		
+		$out->addModuleStyles( 'ext.blogPage.create.css' );
+
+		$cloud = new BlogTagCloud( 1000 );
+
+		// Show the blog rules, if the message containing them ain't empty
+		$message = $this->msg( 'blog-create-rules' );
+		if ( !$message->isDisabled() ) {
+			$formDescriptor['rules'] = [
+				'type' => 'info',
+				'default' => $message->parse()
+			];
+		}
+
+		$formDescriptor['title'] = [
+			'type' => 'text',
+			'label-message' => 'blog-create-title',
+			'default' => $this->getRequest()->getVal( 'blogtitle' ),
+			'required' => true,
+			'cssclass' => 'createblogpost-input'
+		];
+
+		$formDescriptor['content'] = [
+			'type' => 'textarea',
+			'label-message' => 'blog-create-text',
+			'default' => $this->getRequest()->getVal( 'blogcontent' ),
+			'required' => true,
+			'cssclass' => 'createblogpost-input'
+		];
+
+		$formDescriptor['categories'] = [
+			'type' => 'multiselect',
+			'default' => [],
+			'dropdown' => true,
+			'label-message' => 'blog-create-categories',
+			'help-message' => 'blog-create-category-help',
+			'cssclass' => 'createblogpost-input'
+		];
+
+		foreach ( $cloud->tags as $tag => $att ) {
+			$formDescriptor['categories']['options'][$tag] = $tag;
+		}
+
+		$formDescriptor['copyrightwarning'] = [
+			'type' => 'info',
+			'default' => $this->displayCopyrightWarning(),
+			'raw' => true
+		];
+
+		$formDescriptor['preview'] = [
+			'type' => 'check',
+			'label-message' => 'showpreview',
+		];
+
+		return $formDescriptor;
 	}
 
 	/**
-	 * Show the special page
-	 *
-	 * @param mixed|null $par Parameter passed to the special page or null
+	 * @param array $formData
+	 * @return bool
 	 */
-	public function execute( $par ) {
+	public function onSubmit( array $formData ) {
 		$out = $this->getOutput();
 		$user = $this->getUser();
 		$request = $this->getRequest();
-
-		// If the user can't create blog posts, display an error
-		if ( !$user->isAllowed( 'createblogpost' ) ) {
-			throw new PermissionsError( 'createblogpost' );
-		}
-
-		// Show a message if the database is in read-only mode
-		$this->checkReadOnly();
-
-		// If user is blocked, s/he doesn't need to access this page
-		if ( $user->isBlocked() ) {
-			throw new UserBlockedError( $user->getBlock() );
-		}
-
-		// Set page title, robot policies, etc.
-		$this->setHeaders();
-
-		// Add CSS & JS
-		$out->addModuleStyles( 'ext.blogPage.create.css' );
-		$out->addModules( 'ext.blogPage.create.js' );
-
-		// Add WikiEditor extension modules if enabled for the current user
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
-			$out->addModuleStyles( 'ext.wikiEditor.styles' );
-			$out->addModules( 'ext.wikiEditor' );
-		}
-
 		$services = MediaWikiServices::getInstance();
 
-		// If the request was POSTed, we haven't submitted a request yet AND
-		// we have a title, create the page...otherwise just display the
-		// creation form
-		if (
-			$request->wasPosted() &&
-			!$request->getCheck( 'wpPreview' ) &&
-			$_SESSION['alreadysubmitted'] == false
-		) {
-			$_SESSION['alreadysubmitted'] = true;
+		$userSuppliedTitle = $formData['title'];
+		$title = Title::makeTitleSafe( NS_BLOG, $user->getName() . '/' .  $userSuppliedTitle );
 
-			// Protect against cross-site request forgery (CSRF)
-			if ( !$user->matchEditToken( $request->getVal( 'wpEditToken' ) ) ) {
-				$out->addWikiMsg( 'sessionfailure' );
-				return;
-			}
+		// Localized variables that will be used when creating the page
+		$contLang = $services->getContentLanguage();
+		$localizedCatNS = $contLang->getNsText( NS_CATEGORY );
+		$today = $contLang->date( wfTimestampNow() );
 
-			// Create a Title object, or try to, anyway
-			$userSuppliedTitle = $request->getVal( 'title2' );
-			$title = Title::makeTitleSafe( NS_BLOG, $this->getUser()->getName() . '/' .  $userSuppliedTitle );
+		// Create the blog page if it doesn't already exist
+		$page = WikiPage::factory( $title );
+		if ( $page->exists() ) {
+			$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
+			$out->addWikiMsg( 'blog-create-error-page-exists' );
+			return;
+			} elseif ( $formData['preview'] ?? 0 ) {
+				// Previewing a blog post
+				$out->setPageTitle( $this->msg( 'preview' ) );
+				$out->addHTML(
+					'<div class="previewnote"><p>' .
+					Html::warningBox( $this->msg( 'previewnote' )->text() ) .
+					'</p></div>'
+				);
+				if ( $user->isAnon() ) {
+					$out->wrapWikiMsg(
+						"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
+						'anonpreviewwarning'
+					);
+				}
 
-			// @todo CHECKME: are these still needed? The JS performs these
-			// checks already but then again JS is also easy to fool...
+				// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
+				$userSuppliedTitle = $formData['title'];
+				$title = Title::makeTitleSafe( NS_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
 
-			// The user didn't supply a title? Ask them to supply one.
-			if ( !$userSuppliedTitle ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$out->addWikiMsg( 'blog-create-error-need-title' );
-				$out->addReturnTo( $this->getPageTitle() );
-				return;
-			}
+				if ( is_object( $title ) ) {
+					$parser = $services->getParser();
+					$parserOptions = ParserOptions::newFromUser( $user );
+					$preparsed = $parser->preSaveTransform(
+						$formData['content'], // We're intentionally ignoring categories (etc.) here
+						$title,
+						$user,
+						$parserOptions,
+						true
+					);
 
-			// The user didn't supply the blog post text? Ask them to supply it.
-			if ( !$request->getVal( 'wpTextbox1' ) ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$out->addWikiMsg( 'blog-create-error-need-content' );
-				$out->addReturnTo( $this->getPageTitle() );
-				return;
-			}
+					$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
 
-			// Localized variables that will be used when creating the page
-			$contLang = $services->getContentLanguage();
-			$localizedCatNS = $contLang->getNsText( NS_CATEGORY );
-			$today = $contLang->date( wfTimestampNow() );
-
-			// Create the blog page if it doesn't already exist
-			$page = WikiPage::factory( $title );
-			if ( $page->exists() ) {
-				$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
-				$out->addWikiMsg( 'blog-create-error-page-exists' );
-				$out->addReturnTo( $this->getPageTitle() );
+					$out->addHTML( $previewableText );
+				}
 				return;
 			} else {
 				// The blog post will be by default categorized into two
@@ -128,11 +151,10 @@ class SpecialCreateBlogPost extends SpecialPage {
 					"[[{$localizedCatNS}:{$today}]]"
 				];
 
-				$userSuppliedCategories = $request->getVal( 'pageCtg' );
+				$userSuppliedCategories = $formData['categories'];
 				if ( !empty( $userSuppliedCategories ) ) {
 					// Explode along commas so that we will have an array that
 					// we can loop over
-					$userSuppliedCategories = explode( ',', $userSuppliedCategories );
 					foreach ( $userSuppliedCategories as $cat ) {
 						$cat = trim( $cat ); // GTFO@excess whitespace
 						if ( !empty( $cat ) ) {
@@ -150,144 +172,29 @@ class SpecialCreateBlogPost extends SpecialPage {
 					// here and Template:Blog Bottom at the bottom, where we
 					// have the comments tag right now
 					'<!--start text-->' . "\n" .
-						$request->getVal( 'wpTextbox1' ) . "\n\n" .
+						$formData['content'] . "\n\n" .
 						$wikitextCategories .
 						"\n__NOEDITSECTION__",
 					$page->getTitle()
 				);
+				
 				$page->doEditContent(
 					$pageContent,
 					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
 				);
 
-
 				// Redirect the user to the new blog post they just created
 				$out->redirect( $title->getFullURL() );
 			}
-		} elseif (
-			$request->wasPosted() &&
-			$request->getCheck( 'wpPreview' )
-		) {
-			// Previewing a blog post
-			$out->setPageTitle( $this->msg( 'preview' ) );
-			$out->addHTML(
-				'<div class="previewnote"><p>' .
-				Html::warningBox( $this->msg( 'previewnote' )->text() ) .
-				'</p></div>'
-			);
-			if ( $user->isAnon() ) {
-				$out->wrapWikiMsg(
-					"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
-					'anonpreviewwarning'
-				);
-			}
 
-			// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
-			$userSuppliedTitle = $request->getVal( 'title2' );
-			$title = Title::makeTitleSafe( NS_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
-
-			if ( is_object( $title ) ) {
-				$parser = $services->getParser();
-				$parserOptions = ParserOptions::newFromUser( $user );
-				$preparsed = $parser->preSaveTransform(
-					$request->getVal( 'wpTextbox1' ), // We're intentionally ignoring categories (etc.) here
-					$title,
-					$user,
-					$parserOptions,
-					true
-				);
-				// $parserOutput = $parser->parse( $preparsed, $title, $parserOptions );
-
-				$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
-
-				$out->addHTML( $previewableText );
-			}
-
-			$out->addHTML( $this->getEditFormWithRules() );
-		} else {
-			$_SESSION['alreadysubmitted'] = false;
-
-			$out->addHTML( $this->getEditFormWithRules() );
-		}
+		return true;
 	}
 
 	/**
-	 * Show the input field where the user can enter the blog post title.
-	 * @return string HTML
+	 * @return string
 	 */
-	public function displayFormPageTitle() {
-		$output = '<span class="create-title">' . $this->msg( 'blog-create-title' )->escaped() .
-			'</span><br />';
-		$output .= Html::input( 'title2', $this->getRequest()->getVal( 'title2' ), 'text', [
-			'tabindex' => $this->tabCounter,
-			'id' => 'title',
-			'class' => 'createbox'
-		] );
-		$output .= '<br /><br />';
-		$this->tabCounter++;
-		return $output;
-	}
-
-	/**
-	 * Show the input field where the user can enter the blog post body.
-	 * @return string HTML
-	 */
-	public function displayFormPageText() {
-		$output = '<span class="create-title">' . $this->msg( 'blog-create-text' )->escaped() .
-			'</span><br />';
-		$output .= Html::element( 'textarea', [
-			'class' => 'createbox',
-			'tabindex' => $this->tabCounter,
-			'accesskey' => ',',
-			'name' => 'wpTextbox1',
-			'id' => 'wpTextbox1',
-			'rows' => 10,
-			'cols' => 80
-		], $this->getRequest()->getVal( 'wpTextbox1' ) );
-		$output .= '<br /><br />';
-		$this->tabCounter++;
-		return $output;
-	}
-
-	/**
-	 * Show the category cloud.
-	 * @return string HTML
-	 */
-	public function displayFormPageCategories() {
-		$cloud = new BlogTagCloud( 1000 );
-
-		$tagcloud = '<div id="create-tagcloud">';
-		$tagnumber = 0;
-		foreach ( $cloud->tags as $tag => $att ) {
-			$tag = trim( $tag );
-			$blogUserCat = str_replace( '$1', '', $this->msg( 'blog-by-user-category' )->inContentLanguage()->text() );
-			// Ignore "Articles by User X" categories
-			if ( !preg_match( '/' . preg_quote( $blogUserCat, '/' ) . '/', $tag ) ) {
-				$slashedTag = $tag; // define variable
-				// Fix for categories that contain an apostrophe
-				if ( strpos( $tag, "'" ) ) {
-					$slashedTag = str_replace( "'", "\'", $tag );
-				}
-				$tagcloud .= " <span id=\"tag-{$tagnumber}\" style=\"font-size:{$cloud->tags[$tag]['size']}{$cloud->tags_size_type}\">
-					<a class=\"tag-cloud-entry\" data-blog-slashed-tag=\"" . $slashedTag . "\" data-blog-tag-number=\"{$tagnumber}\">{$tag}</a>
-				</span>";
-				$tagnumber++;
-			}
-		}
-		$tagcloud .= '</div>';
-
-		$output = '<div class="create-title">' .
-			$this->msg( 'blog-create-categories' )->escaped() .
-			'</div>
-			<div class="categorytext">' .
-				$this->msg( 'blog-create-category-help' )->escaped() .
-			'</div>' . "\n";
-		$output .= $tagcloud . "\n";
-		$output .= '<textarea class="createbox" tabindex="' . $this->tabCounter .
-			'" accesskey="," name="pageCtg" id="pageCtg" rows="2" cols="80"></textarea><br /><br />';
-		$this->tabCounter++;
-
-		return $output;
+	protected function getDisplayFormat() {
+		return 'ooui';
 	}
 
 	/**
@@ -298,6 +205,7 @@ class SpecialCreateBlogPost extends SpecialPage {
 	 */
 	public function displayCopyrightWarning() {
 		global $wgRightsText;
+
 		if ( $wgRightsText ) {
 			$copywarnMsg = 'copyrightwarning';
 			$copywarnMsgParams = [
@@ -314,69 +222,4 @@ class SpecialCreateBlogPost extends SpecialPage {
 			$this->msg( $copywarnMsg, $copywarnMsgParams )->parseAsBlock() .
 			'</div>';
 	}
-
-	/**
-	 * Show the form for creating new blog posts.
-	 * @return string HTML
-	 */
-	public function displayForm() {
-		$user = $this->getUser();
-		$output = '<form id="editform" name="editform" method="post" action="' .
-			htmlspecialchars( $this->getPageTitle()->getFullURL() ) . '" enctype="multipart/form-data">';
-		$output .= "\n" . $this->displayFormPageTitle() . "\n";
-		$output .= "\n" . $this->displayFormPageText() . "\n";
-
-		$output .= "\n" . $this->displayFormPageCategories() . "\n";
-		$output .= "\n" . $this->displayCopyrightWarning() . "\n";
-		$output .= '<div class="blog-create-buttons">';
-		$output .= Html::input(
-			'wpSave',
-			$this->msg( 'blog-create-button' )->text(),
-			'submit',
-			[
-				'accesskey' => Linker::accesskey( 'save' ),
-				'title' => $this->msg( 'tooltip-save' )->text(),
-				'class' => 'createsubmit site-button'
-			]
-		);
-		$output .= Html::input(
-			'wpPreview',
-			$this->msg( 'showpreview' )->text(),
-			'submit',
-			[
-				'accesskey' => Linker::accesskey( 'preview' ),
-				'title' => $this->msg( 'tooltip-preview' )->text(),
-				'class' => 'site-button'
-			]
-		);
-		$output .= '</div>';
-		$output .= '<input type="hidden" value="" name="wpSection" />
-			<input type="hidden" value="' . htmlspecialchars( $user->getEditToken() ) .
-				'" name="wpEditToken" />';
-		$output .= "\n" . '</form>' . "\n";
-
-		return $output;
-	}
-
-	/**
-	 * Get the blog editor form with the blog creation rules displayed before the
-	 * editor, provided the rule message has some content, obviously.
-	 *
-	 * @return string HTML
-	 */
-	public function getEditFormWithRules() {
-		$output = '';
-
-		// Show the blog rules, if the message containing them ain't empty
-		$message = $this->msg( 'blog-create-rules' );
-		if ( !$message->isDisabled() ) {
-			$output .= $message->escaped() . '<br />';
-		}
-
-		// Main form
-		$output .= $this->displayForm();
-
-		return $output;
-	}
-
 }

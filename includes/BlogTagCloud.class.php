@@ -24,7 +24,7 @@ class BlogTagCloud {
 	}
 
 	public function initialize() {
-		$dbr = wfGetDB( DB_MASTER );
+		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select(
 			'category',
 			[ 'cat_title', 'cat_pages' ],

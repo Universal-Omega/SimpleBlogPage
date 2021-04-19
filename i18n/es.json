@@ -1,8 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ciencia Al Poder",
-			"Universal Omega"
+			"Ciencia Al Poder"
 		]
 	},
 	"simpleblogpage-desc": "Sistema de Blog con funcionalidades de comentarios y valoraciones, [[Special:CreateBlogPost|una página especial para publicar entradas de blog]] y [[Special:ArticlesHome|una página especial para listar entradas de blog]]",
@@ -48,12 +47,7 @@
 	"blog-create-categories": "Categorías",
 	"blog-create-button": "Crear la entrada",
 	"blog-create-summary": "Creó una nueva entrada de blog.",
-	"blog-create-error-need-content": "'''Error:''' Debes añadir algún contenido a la entrada de blog.",
-	"blog-create-error-need-title": "'''Error:''' Debes proporcionar un título para la entrada de blog.",
 	"blog-create-error-page-exists": "'''Error:''' Ya existe una entrada de blog con este título. Cambia el título de la entrada de blog.",
-	"blog-js-create-error-need-content": "Debes añadir algún contenido a la entrada de blog.",
-	"blog-js-create-error-need-title": "Debes proporcionar un título para la entrada de blog.",
-	"blog-js-create-error-page-exists": "Ya existe una entrada de blog con este título. Cambia el título de la entrada de blog.",
 	"blog-more": "más",
 	"blog-time-ago": "hace $1",
 	"blog-time-days": "{{PLURAL:$1|un día|$1 días}}",

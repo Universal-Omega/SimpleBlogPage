@@ -1,19 +1,9 @@
 /* CSS for Special:CreateBlogPost */
-.create-title {
+.createblogpost-input {
 	color: #333;
 	font-size: 14px;
 	font-weight: 700;
 	margin: 0 0 5px;
-}
-
-.categorytext {
-	max-width: 100%;
-	width: 700px;
-}
-
-/* Ensure that there's a bit of spacing between the "Save" and "Preview" buttons */
-.blog-create-buttons input[name="wpPreview"] {
-	margin: 5px;
 }
 
 /* Copyright stuff below the form, right above the submit button */
@@ -23,36 +13,4 @@
 	margin: 0 0 10px;
 	width: 700px;
 	max-width: 100%;
-}
-
-#editform .title {
-	color: #78ba5d;
-	font-size: 1.1em;
-	font-weight: 700;
-	margin: 0 0 5px;
-}
-
-/* Category tag cloud */
-#create-tagcloud {
-	line-height: 25pt;
-	padding-bottom: 15px;
-	width: 600px;
-	max-width: 100%;
-}
-
-a.tag-cloud-entry {
-	cursor: pointer;
-	text-decoration: underline;
-}
-
-input#title {
-	width: 500px;
-}
-
-/* Normal low-end smartphones with a low resolution (i.e. Nokia X) */
-@media screen and (max-width: 750px) {
-	input#title {
-		/* Prevent the title input from overflowing */
-		max-width: 100%;
-	}
 }
