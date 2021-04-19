@@ -22,7 +22,6 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$out = $this->getOutput();
 		
 		$out->addModuleStyles( 'ext.blogPage.create.css' );
-		$out->addModules( 'ext.blogPage.create.js' );
 
 		$cloud = new BlogTagCloud( 1000 );
 
