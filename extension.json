@@ -76,7 +76,6 @@
 	"Hooks": {
 		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
 		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage",
-		"CanonicalNamespaces": "SimpleBlogPageHooks::onCanonicalNamespaces",
 		"EditPage::showEditForm:initial": "SimpleBlogPageHooks::onEditPageshowEditForminitial"
 	},
 	"MessagesDirs": {
