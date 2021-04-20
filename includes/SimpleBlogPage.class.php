@@ -42,7 +42,7 @@ class SimpleBlogPage extends Article {
 	 */
 	function showUserPosts( $user, $output ) {
 		// Add CSS
-		$output->addModuleStyles( 'ext.blogPage.articlesHome' );
+		$output->addModuleStyles( 'ext.simpleBlogPage.articlesHome' );
 
 		// Determine the page title and set it
 		$name = wfMessage( 'ah-all-posts' );
