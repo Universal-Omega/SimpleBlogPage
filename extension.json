@@ -75,8 +75,7 @@
 	},
 	"Hooks": {
 		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
-		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage",
-		"EditPage::showEditForm:initial": "SimpleBlogPageHooks::onEditPageshowEditForminitial"
+		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage"
 	},
 	"MessagesDirs": {
 		"SimpleBlogPage": [
@@ -111,11 +110,6 @@
 			],
 			"dependencies": [
 				"mediawiki.api"
-			]
-		},
-		"ext.AddMoreButton": {
-			"scripts": [
-				"resources/js/AddMoreButton.js"
 			]
 		}
 	},
