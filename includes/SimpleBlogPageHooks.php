@@ -18,7 +18,7 @@ class SimpleBlogPageHooks {
 	 * @param Article|SimpleBlogPage &$article Instance of Article that we convert into a SimpleBlogPage
 	 * @param RequestContext $context
 	 */
-	public static function blogFromTitle( Title &$title, &$article, $context ) {
+	public static function onArticleFromTitle( Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_USER_BLOG ) {
 			$out = $context->getOutput();
 			$out->enableClientCache( false );
@@ -35,15 +35,18 @@ class SimpleBlogPageHooks {
 	 * the 'edit' user right when they're trying to edit a page in the NS_USER_BLOG NS.
 	 *
 	 * @param EditPage $editPage
-	 * @return bool True if the user should be allowed to continue, else false
+	 * @return bool true if the user should be allowed to continue, else false
 	 */
-	public static function allowShowEditSimpleBlogPage( $editPage ) {
+	public static function onAlternateEdit( EditPage $editPage ) {
 		$context = $editPage->getContext();
 		$output = $context->getOutput();
 		$user = $context->getUser();
+
 		$basetitle = $editPage->getTitle()->getBaseText();
+
 		$isnewpost = !$editPage->getTitle()->exists();
-		$isnotowner = !($basetitle === $user->getName());
+		$isnotowner = !( $basetitle === $user->getName() );
+
 		// This prevents users from creating blog posts under another user's name. 
 		$c0 = $isnewpost ? 'true' : 'false';
 		$c1 = $isnotowner ? 'true' : 'false';
@@ -55,15 +58,19 @@ class SimpleBlogPageHooks {
 				} else {
 					$output->addWikiMsg( 'blog-login-edit' );
 				}
+
 				return false;
 			}
 
 			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
 				$output->addWikiMsg( 'blog-permission-required' );
+
 				return false;
 			}
+
 			if ( $isnewpost && $isnotowner ) {
 				$output->addWikiMsg( 'blog-newpost-denied' );
+
 				return false;
 			}
 		}
