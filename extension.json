@@ -101,6 +101,18 @@
 				"resources/css/ext.blogpage.createblogpost.css"
 			]
 		},
+		"ext.blogPage.create.js": {
+			"scripts": [
+				"resources/js/ext.blogpage.createblogpost.js",
+				"resources/js/AddMoreButton.js"
+			],
+			"messages": [
+				"blog-js-create-error-page-exists"
+			],
+			"dependencies": [
+				"mediawiki.api"
+			]
+		},
 		"ext.AddMoreButton": {
 			"scripts": [
 				"resources/js/AddMoreButton.js"
