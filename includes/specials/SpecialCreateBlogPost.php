@@ -23,6 +23,11 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		
 		$out->addModuleStyles( 'ext.blogPage.create.css' );
 
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+			$out->addModuleStyles( 'ext.wikiEditor.styles' );
+			$out->addModules( 'ext.wikiEditor' );
+		}
+
 		$cloud = new BlogTagCloud( 1000 );
 
 		// Show the blog rules, if the message containing them ain't empty
