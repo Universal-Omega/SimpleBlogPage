@@ -15,6 +15,7 @@
 				( ( document.getElementById( 'pageCtg' ).value ) ? ', ' : '' ) +
 				tagname;
 		},
+	};
 
 	$( function () {
 		// Tag cloud
