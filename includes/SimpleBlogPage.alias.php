@@ -13,9 +13,3 @@ $specialPageAliases['en'] = [
 	'ArticlesHome' => [ 'ArticlesHome' ],
 	'CreateBlogPost' => [ 'CreateBlogPost' ],
 ];
-
-/** Finnish (Suomi) */
-$specialPageAliases['fi'] = [
-	'ArticlesHome' => [ 'Artikkelien kotisivu' ],
-	'CreateBlogPost' => [ 'Luo blogikirjoitus' ],
-];
