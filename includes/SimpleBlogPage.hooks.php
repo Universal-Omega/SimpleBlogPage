@@ -70,8 +70,4 @@ class SimpleBlogPageHooks {
 
 		return true;
 	}
-	
-	public static function onEditPageshowEditForminitial( EditPage $editPage, OutputPage $output ) {
-		$output->addModules( 'ext.AddMoreButton' );
-	}
 }
