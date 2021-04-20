@@ -56,6 +56,7 @@
 	"blog-create-button": "Create!",
 	"blog-create-summary": "New blog post created.",
 	"blog-create-error-page-exists": "'''Error:''' There is already a blog post with that title. Please choose a different title for your blog post.",
+	"blog-js-create-error-page-exists": "There is already a blog post with that title. Please choose a different title for your blog post.",
 	"blog-more": "read more",
 	"blog-time-ago": "$1 ago",
 	"blog-time-days": "{{PLURAL:$1|one day|$1 days}}",
