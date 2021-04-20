@@ -105,9 +105,6 @@
 				"resources/js/ext.simpleblogpage.createblogpost.js",
 				"resources/js/AddMoreButton.js"
 			],
-			"messages": [
-				"blog-js-create-error-page-exists"
-			],
 			"dependencies": [
 				"mediawiki.api"
 			]
