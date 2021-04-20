@@ -28,7 +28,7 @@ class ArticlesHome extends SpecialPage {
 		$out = $this->getOutput();
 
 		// Add CSS
-		$out->addModuleStyles( 'ext.blogPage.articlesHome' );
+		$out->addModuleStyles( 'ext.simpleBlogPage.articlesHome' );
 
 		// Determine the page title and set it
 		$name = $this->msg( 'ah-all-posts' );
