@@ -18,6 +18,8 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 	 * @return array
 	 */
 	protected function getFormFields() {
+		global $wgRightsText;
+
 		$formDescriptor = [];
 		$out = $this->getOutput();
 		
@@ -71,9 +73,26 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 			$formDescriptor['categories']['options'][$tag] = $tag;
 		}
 
+		if ( $wgRightsText ) {
+			$copywarnMsg = 'copyrightwarning';
+			$copywarnMsgParams = [
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]',
+				$wgRightsText
+			];
+		} else {
+			$copywarnMsg = 'copyrightwarning2';
+			$copywarnMsgParams = [
+				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]'
+			];
+		}
+
+		$copyrightWarning = '<div class="copyright-warning">' .
+			$this->msg( $copywarnMsg, $copywarnMsgParams )->parseAsBlock() .
+			'</div>';
+
 		$formDescriptor['copyrightwarning'] = [
 			'type' => 'info',
-			'default' => $this->displayCopyrightWarning(),
+			'default' => $copyrightWarning,
 			'raw' => true
 		];
 
@@ -205,29 +224,4 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		return 'ooui';
 	}
 
-	/**
-	 * Display the standard copyright notice that is shown on normal edit page,
-	 * on the upload form etc.
-	 *
-	 * @return string HTML
-	 */
-	public function displayCopyrightWarning() {
-		global $wgRightsText;
-
-		if ( $wgRightsText ) {
-			$copywarnMsg = 'copyrightwarning';
-			$copywarnMsgParams = [
-				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]',
-				$wgRightsText
-			];
-		} else {
-			$copywarnMsg = 'copyrightwarning2';
-			$copywarnMsgParams = [
-				'[[' . $this->msg( 'copyrightpage' )->inContentLanguage()->text() . ']]'
-			];
-		}
-		return '<div class="copyright-warning">' .
-			$this->msg( $copywarnMsg, $copywarnMsgParams )->parseAsBlock() .
-			'</div>';
-	}
 }
