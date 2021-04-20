@@ -199,7 +199,7 @@ class SimpleBlogPage extends Article {
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-		$authors = $linkRenderer->makeLink( Title::newFromText( $this->AuthorName, NS_BLOG ), $this->AuthorName );
+		$authors = $linkRenderer->makeKnownLink( Title::newFromText( $this->AuthorName, NS_BLOG ), $this->AuthorName );
 
 		$output .= $authors;
 
