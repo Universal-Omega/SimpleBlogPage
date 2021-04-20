@@ -16,34 +16,6 @@
 				tagname;
 		},
 
-		/**
-		 * Check that the user has given a title for the blog post and has supplied
-		 * some content; then check the existence of the title and notify the user
-		 * if there's already a blog post with the same name as their blog post.
-		 *
-		 * @param {jQuery.Event} e
-		 * @return {string}
-		 */
-		performChecks: function ( e ) {
-			var title = document.getElementById( 'title' ).value;
-
-			( new mw.Api() ).get( {
-				action: 'query',
-				titles: mw.config.get( 'wgFormattedNamespaces' )[ 500 ] + ':' + title,
-				format: 'json',
-				formatversion: 2
-			} ).done( function ( data ) {
-				// Missing page means that we can create it, obviously!
-				if ( data.query.pages[ 0 ] && data.query.pages[ 0 ].missing === true ) {
-					document.editform.submit();
-				} else {
-					// could also show data.query.pages[0].invalidreason to the user here instead
-					alert( mw.msg( 'blog-js-create-error-page-exists' ) );
-				}
-			} );
-		}
-	};
-
 	$( function () {
 		// Tag cloud
 		$( 'a.tag-cloud-entry' ).each( function () {
@@ -54,11 +26,6 @@
 					$that.data( 'blog-tag-number' )
 				);
 			} );
-		} );
-
-		// Save button
-		$( 'input[name="wpSave"]' ).on( 'click', function ( e ) {
-			CreateBlogPost.performChecks( e );
 		} );
 	} );
 }() );
