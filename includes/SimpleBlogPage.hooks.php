@@ -70,23 +70,8 @@ class SimpleBlogPageHooks {
 
 		return true;
 	}
-
-
-
-	/**
-	 * Register the canonical names for our namespace and its talkspace.
-	 *
-	 * @param array &$list Array of namespace numbers with corresponding
-	 *                     canonical names
-	 */
-	public static function onCanonicalNamespaces( &$list ) {
-		$list[NS_USER_BLOG] = 'User_blog';
-		$list[NS_USER_BLOG_TALK] = 'User_blog_talk';
-	}
 	
-	
-	
-	public static function onEditPageshowEditForminitial(EditPage $editPage, OutputPage $output ) {
+	public static function onEditPageshowEditForminitial( EditPage $editPage, OutputPage $output ) {
 		$output->addModules( 'ext.AddMoreButton' );
 	}
 }
