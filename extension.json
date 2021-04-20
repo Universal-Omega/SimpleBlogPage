@@ -7,7 +7,7 @@
 		"Jack Phoenix",
 		"1f604"
 	],
-	"license-name": "GPL-3.0",
+	"license-name": "GPL-3.0-or-later",
 	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
 	"descriptionmsg": "simpleblogpage-desc",
 	"requires": {
