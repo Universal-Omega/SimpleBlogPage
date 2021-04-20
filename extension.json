@@ -86,7 +86,7 @@
 	"ResourceModules": {
 		"ext.simpleBlogPage": {
 			"styles": [
-				"resources/css/ext.simpleblogpage.blogpage.css",
+				"resources/css/ext.simpleblogpage.simpleblogpage.css",
 				"resources/css/ext.simpleblogpage.hideContentsub.css"
 			]
 		},
