@@ -84,26 +84,26 @@
 		]
 	},
 	"ResourceModules": {
-		"ext.blogPage": {
+		"ext.simpleBlogPage": {
 			"styles": [
-				"resources/css/ext.blogpage.blogpage.css",
-				"resources/css/ext.blogpage.hideContentsub.css"
+				"resources/css/ext.simpleblogpage.blogpage.css",
+				"resources/css/ext.simpleblogpage.hideContentsub.css"
 			]
 		},
-		"ext.blogPage.articlesHome": {
+		"ext.simpleBlogPage.articlesHome": {
 			"styles": [
-				"resources/css/ext.blogpage.articleshome.css",
-				"resources/css/ext.blogpage.hideContentsub.css"
+				"resources/css/ext.simpleblogpage.articleshome.css",
+				"resources/css/ext.simpleblogpage.hideContentsub.css"
 			]
 		},
-		"ext.blogPage.create.css": {
+		"ext.simpleBlogPage.create.css": {
 			"styles": [
-				"resources/css/ext.blogpage.createblogpost.css"
+				"resources/css/ext.simpleblogpage.createblogpost.css"
 			]
 		},
-		"ext.blogPage.create.js": {
+		"ext.simpleBlogPage.create.js": {
 			"scripts": [
-				"resources/js/ext.blogpage.createblogpost.js",
+				"resources/js/ext.simpleblogpage.createblogpost.js",
 				"resources/js/AddMoreButton.js"
 			],
 			"messages": [
