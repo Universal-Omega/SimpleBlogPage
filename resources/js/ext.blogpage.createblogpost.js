@@ -25,23 +25,7 @@
 		 * @return {string}
 		 */
 		performChecks: function ( e ) {
-			// In PHP, we need to use $wgRequest->getVal( 'title2' ); 'title'
-			// contains the current special page's name instead of the blog post
-			// name
-			var title = document.getElementById( 'title' ).value,
-				textarea = document.getElementById( 'wpTextbox1' ).value;
-			if ( !title || title === '' ) {
-				// First prevent the default action (which would be to submit the form)
-				e.preventDefault();
-				alert( mw.msg( 'blog-js-create-error-need-title' ) );
-				return '';
-			}
-			if ( !textarea || textarea === '' ) {
-				// First prevent the default action (which would be to submit the form)
-				e.preventDefault();
-				alert( mw.msg( 'blog-js-create-error-need-content' ) );
-				return '';
-			}
+			var title = document.getElementById( 'title' ).value;
 
 			( new mw.Api() ).get( {
 				action: 'query',
