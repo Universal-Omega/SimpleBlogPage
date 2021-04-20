@@ -14,6 +14,30 @@
 		"MediaWiki": ">= 1.35.0"
 	},
 	"type": "other",
+	"MessagesDirs": {
+		"SimpleBlogPage": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"SimpleBlogPageAliases": "includes/SimpleBlogPageAliases.php",
+		"SimpleBlogPageNamespaces": "includes/SimpleBlogPageNamespaces.php"
+	},
+	"AutoloadClasses": {
+		"SimpleBlogPage": "includes/SimpleBlogPage.php",
+		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
+		"BlogTagCloud": "includes/BlogTagCloud.php",
+		"SpecialCreateBlogPost": "includes/specials/SpecialCreateBlogPost.php",
+		"SimpleBlogPageHooks": "includes/SimpleBlogPageHooks.php"
+	},
+	"GroupPermissions": {
+		"user": {
+			"createblogpost": true
+		}
+	},
+	"AvailableRights": [
+		"createblogpost"
+	],
 	"namespaces": [
 		{
 			"id": 500,
@@ -29,55 +53,9 @@
 			"subpages": true
 		}
 	],
-	"config": {
-		"SimpleBlogPageDisplay": {
-			"value": {
-				"leftcolumn": true,
-				"rightcolumn": true,
-				"author": true,
-				"author_articles": true,
-				"recent_editors": true,
-				"recent_voters": true,
-				"popular_articles": true,
-				"in_the_news": true,
-				"comments_of_day": false,
-				"games": true,
-				"new_articles": true
-			}
-		},
-		"UserProfileDisplay": {
-			"value": {
-				"articles": true
-			}
-		}
-	},
-	"AutoloadClasses": {
-		"SimpleBlogPage": "includes/SimpleBlogPage.php",
-		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
-		"BlogTagCloud": "includes/BlogTagCloud.php",
-		"SpecialCreateBlogPost": "includes/specials/SpecialCreateBlogPost.php",
-		"SimpleBlogPageHooks": "includes/SimpleBlogPageHooks.php"
-	},
-	"AvailableRights": [
-		"createblogpost"
-	],
-	"ExtensionMessagesFiles": {
-		"SimpleBlogPageAliases": "includes/SimpleBlogPageAliases.php",
-		"SimpleBlogPageNamespaces": "includes/SimpleBlogPageNamespaces.php"
-	},
-	"GroupPermissions": {
-		"user": {
-			"createblogpost": true
-		}
-	},
-	"Hooks": {
-		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
-		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage"
-	},
-	"MessagesDirs": {
-		"SimpleBlogPage": [
-			"i18n"
-		]
+	"SpecialPages": {
+		"ArticlesHome": "ArticlesHome",
+		"CreateBlogPost": "SpecialCreateBlogPost"
 	},
 	"ResourceModules": {
 		"ext.simpleBlogPage": {
@@ -111,9 +89,31 @@
 		"localBasePath": "",
 		"remoteExtPath": "SimpleBlogPage"
 	},
-	"SpecialPages": {
-		"ArticlesHome": "ArticlesHome",
-		"CreateBlogPost": "SpecialCreateBlogPost"
+	"config": {
+		"SimpleBlogPageDisplay": {
+			"value": {
+				"leftcolumn": true,
+				"rightcolumn": true,
+				"author": true,
+				"author_articles": true,
+				"recent_editors": true,
+				"recent_voters": true,
+				"popular_articles": true,
+				"in_the_news": true,
+				"comments_of_day": false,
+				"games": true,
+				"new_articles": true
+			}
+		},
+		"UserProfileDisplay": {
+			"value": {
+				"articles": true
+			}
+		}
+	},
+	"Hooks": {
+		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
+		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage"
 	},
 	"manifest_version": 2
 }
