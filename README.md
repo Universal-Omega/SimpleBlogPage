@@ -20,7 +20,7 @@ wfLoadExtension( 'SimpleBlogPage' );
 Major changes:
 
 - Got rid of dependencies on SocialProfile, VoteNY and Comments. So this extension has NO dependencies!
-- SimpleBlogPage is NOT compatible with BlogPage (e.g it uses the same namespace), you MUST NOT have both extensions installed at the same time!
+- SimpleBlogPage is NOT compatible with BlogPage, you MUST NOT have both extensions installed at the same time!
 
 Features added:
 
@@ -41,9 +41,9 @@ Features removed:
 Potentially breaking changes:
 
 - Switched to using subpages in order to get the author name for various functions. 
-- CreateBlogPost has been changed to create blog posts under Blog:username/blogposttitle rather than Blog:blogposttitle. 
-- The URL Blog:[username] has been hijacked to display a list of all of the user&#x27;s posts in order of time created with the showUserPosts function 
-- Pages with titles of the form Blog:[username] are not treated as blog posts, in fact they are hidden completely and cannot be viewed normally
+- CreateBlogPost has been changed to create blog posts under User_blog:username/blogposttitle rather than Blog:blogposttitle. 
+- The URL User_blog:[username] has been hijacked to display a list of all of the user&#x27;s posts in order of time created with the showUserPosts function 
+- Pages with titles of the form User_blog:[username] are not treated as blog posts, in fact they are hidden completely and cannot be viewed normally
 
 Quality of life improvements / pessimizations:
 
