@@ -21,10 +21,11 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$formDescriptor = [];
 		$out = $this->getOutput();
 		
-		$out->addModuleStyles( 'ext.blogPage.create.css' );
+		$out->addModuleStyles( 'ext.simpleBlogPage.create.css' );
+		$out->addModules( 'ext.simpleBlogPage.create.js' );
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $this->getContext()->getUser()->getOption( 'usebetatoolbar' ) ) {
-			$out->addModules( [ 'ext.wikiEditor', 'ext.AddMoreButton' ] );
+			$out->addModules( 'ext.wikiEditor' );
 		}
 
 		$cloud = new BlogTagCloud( 1000 );
