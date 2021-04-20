@@ -23,7 +23,7 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		
 		$out->addModuleStyles( 'ext.blogPage.create.css' );
 
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $user->getOption( 'usebetatoolbar' ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $this->getContext->getUser()->getOption( 'usebetatoolbar' ) ) {
 			$out->addModuleStyles( 'ext.wikiEditor.styles' );
 			$out->addModules( 'ext.wikiEditor' );
 		}
@@ -52,7 +52,8 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 			'label-message' => 'blog-create-text',
 			'default' => $this->getRequest()->getVal( 'blogcontent' ),
 			'required' => true,
-			'cssclass' => 'createblogpost-input'
+			'cssclass' => 'createblogpost-input',
+			'id' => 'wpTextbox1'
 		];
 
 		$formDescriptor['categories'] = [
