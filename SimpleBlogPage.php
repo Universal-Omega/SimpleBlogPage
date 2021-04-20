@@ -5,8 +5,8 @@ if ( function_exists( 'wfLoadExtension' ) ) {
 
 	$wgMessagesDirs['SimpleBlogPage'] = __DIR__ . '/i18n';
 
-	$wgExtensionMessagesFiles['SimpleBlogPageAlias'] = __DIR__ . '/includes/SimpleBlogPage.alias.php';
-	$wgExtensionMessagesFiles['SimpleBlogPageNamespaces'] = __DIR__ . '/includes/SimpleBlogPage.namespaces.php';
+	$wgExtensionMessagesFiles['SimpleBlogPageAliases'] = __DIR__ . '/includes/SimpleBlogPageAliases.php';
+	$wgExtensionMessagesFiles['SimpleBlogPageNamespaces'] = __DIR__ . '/includes/SimpleBlogPageNamespaces.php';
 
 	wfWarn(
 		'Deprecated PHP entry point used for the SimpleBlogPage extension. ' .

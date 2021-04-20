@@ -52,18 +52,18 @@
 		}
 	},
 	"AutoloadClasses": {
-		"SimpleBlogPage": "includes/SimpleBlogPage.class.php",
+		"SimpleBlogPage": "includes/SimpleBlogPage.php",
 		"ArticlesHome": "includes/specials/SpecialArticlesHome.php",
-		"BlogTagCloud": "includes/BlogTagCloud.class.php",
+		"BlogTagCloud": "includes/BlogTagCloud.php",
 		"SpecialCreateBlogPost": "includes/specials/SpecialCreateBlogPost.php",
-		"SimpleBlogPageHooks": "includes/SimpleBlogPage.hooks.php"
+		"SimpleBlogPageHooks": "includes/SimpleBlogPageHooks.php"
 	},
 	"AvailableRights": [
 		"createblogpost"
 	],
 	"ExtensionMessagesFiles": {
-		"SimpleBlogPageAlias": "includes/SimpleBlogPage.alias.php",
-		"SimpleBlogPageNamespaces": "includes/SimpleBlogPage.namespaces.php"
+		"SimpleBlogPageAliases": "includes/SimpleBlogPageAliases.php",
+		"SimpleBlogPageNamespaces": "includes/SimpleBlogPageNamespaces.php"
 	},
 	"GroupPermissions": {
 		"*": {
