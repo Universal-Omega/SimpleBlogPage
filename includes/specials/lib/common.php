@@ -32,8 +32,10 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 	foreach ( $res as $row ) {
 		// only include blog posts by current user
 		$titleObj = Title::makeTitle( NS_USER_BLOG, $row->page_title );
-		// do not include User_blog:[username] pages as they are not blog posts
-		if ( ( $includeall || $titleObj->getBaseText() === $AuthorName ) && strstr($titleObj->getText(), '/') ) { 
+		// do not include Blog:[username] pages as they are not blog posts
+		$authorOfPost = Title::newFromText( $titleObj->getText() )->getRootText();
+
+		if ( ( $includeall || $authorOfPost === $AuthorName ) && strstr( $titleObj->getText(), '/' ) ) { 
 			$newestBlogPosts[] = [
 				'title' => $titleObj,
 				'ns' => $row->page_namespace,
@@ -63,8 +65,10 @@ function getNewestPosts($includeall = true, $AuthorName = '') {
 					htmlspecialchars( $titleObj->getSubpageText() ) .
 					'</a> [' . strval($wordcount) . 
 					' words]<div class="listpages-date">';
-			$authorOfPost = $titleObj->getBaseText();
-			$author = '<a href="index.php?title=User_blog:' . $authorOfPost . '" style="font-size:10px">' . $authorOfPost . '</a>';
+
+			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+			$author = $linkRenderer->makeKnownLink( Title::newFromText( $authorOfPost, NS_USER_BLOG ), $authorOfPost, [ 'style' => 'font-size: 10px;' ] );
+
 //			$output .= 'created by ' . $author ' on ' . gmdate("Y M j D G:i:s T", strtotime( SimpleBlogPage::getCreateDate( $newestBlogPost['id'] ) ));
 			$output .= '(' .
 				wfMessage( 'blog-created-by',
