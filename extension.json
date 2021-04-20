@@ -112,8 +112,8 @@
 		}
 	},
 	"Hooks": {
-		"ArticleFromTitle": "SimpleBlogPageHooks::blogFromTitle",
-		"AlternateEdit": "SimpleBlogPageHooks::allowShowEditSimpleBlogPage"
+		"ArticleFromTitle": "SimpleBlogPageHooks::onArticleFromTitle",
+		"AlternateEdit": "SimpleBlogPageHooks::onAlternateEdit"
 	},
 	"manifest_version": 2
 }
