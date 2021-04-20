@@ -24,7 +24,7 @@ class SimpleBlogPageHooks {
 			$out->enableClientCache( false );
 
 			// Add CSS
-			$out->addModuleStyles( 'ext.blogPage' );
+			$out->addModuleStyles( 'ext.simpleBlogPage' );
 
 			$article = new SimpleBlogPage( $title );
 		}
