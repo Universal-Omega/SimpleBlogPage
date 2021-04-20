@@ -1,6 +1,6 @@
 <?php
 /**
- * A special page to create new blog posts (pages in the NS_BLOG namespace).
+ * A special page to create new blog posts (pages in the NS_USER_BLOG namespace).
  * Based on the CreateForms extension by Aaron Wright and David Pean.
  *
  * @file
@@ -88,7 +88,7 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$services = MediaWikiServices::getInstance();
 
 		$userSuppliedTitle = $formData['title'];
-		$title = Title::makeTitleSafe( NS_BLOG, $user->getName() . '/' .  $userSuppliedTitle );
+		$title = Title::makeTitleSafe( NS_USER_BLOG, $user->getName() . '/' .  $userSuppliedTitle );
 
 		// Localized variables that will be used when creating the page
 		$contLang = $services->getContentLanguage();
@@ -118,7 +118,7 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 
 				// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
 				$userSuppliedTitle = $formData['title'];
-				$title = Title::makeTitleSafe( NS_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
+				$title = Title::makeTitleSafe( NS_USER_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
 
 				if ( is_object( $title ) ) {
 					$parser = $services->getParser();
