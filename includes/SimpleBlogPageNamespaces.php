@@ -1,6 +1,6 @@
 <?php
 /**
- * Translations of the Blog namespace.
+ * Translations of the User_blog namespace.
  *
  * @file
  */
