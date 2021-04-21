@@ -40,14 +40,14 @@
 	],
 	"namespaces": [
 		{
-			"id": 500,
+			"id": 900,
 			"constant": "NS_USER_BLOG",
 			"name": "User_blog",
 			"protection": "edit",
 			"subpages": true
 		},
 		{
-			"id": 501,
+			"id": 901,
 			"constant": "NS_USER_BLOG_TALK",
 			"name": "User_blog_talk",
 			"subpages": true
