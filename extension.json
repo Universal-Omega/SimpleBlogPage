@@ -14,7 +14,6 @@
 		"MediaWiki": ">= 1.35.0"
 	},
 	"type": "other",
-	"callback": "SimpleBlogPageHooks::onRegistration",
 	"MessagesDirs": {
 		"SimpleBlogPage": [
 			"i18n"
@@ -104,6 +103,11 @@
 				"comments_of_day": false,
 				"games": true,
 				"new_articles": true
+			}
+		},
+		"UserProfileDisplay": {
+			"value": {
+				"articles": true
 			}
 		}
 	},
