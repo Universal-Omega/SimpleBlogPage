@@ -9,7 +9,6 @@ use MediaWiki\MediaWikiServices;
  * @file
  */
 class SimpleBlogPageHooks {
-
 	public static function onRegistration() {
 		global $wgUserProfileDisplay;
 
