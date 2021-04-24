@@ -104,11 +104,6 @@
 				"games": true,
 				"new_articles": true
 			}
-		},
-		"UserProfileDisplay": {
-			"value": {
-				"articles": true
-			}
 		}
 	},
 	"Hooks": {
