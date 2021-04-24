@@ -9,11 +9,6 @@ use MediaWiki\MediaWikiServices;
  * @file
  */
 class SimpleBlogPageHooks {
-	public static function onRegistration() {
-		global $wgUserProfileDisplay;
-
-		$wgUserProfileDisplay['articles'] = true;
-	}
 
 	/**
 	 * Calls SimpleBlogPage instead of standard Article for pages in the NS_USER_BLOG

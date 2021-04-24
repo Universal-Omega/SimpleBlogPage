@@ -14,7 +14,6 @@
 		"MediaWiki": ">= 1.35.0"
 	},
 	"type": "other",
-	"callback": "SimpleBlogPageHooks::onRegistration",
 	"MessagesDirs": {
 		"SimpleBlogPage": [
 			"i18n"
@@ -92,24 +91,25 @@
 	},
 	"config": {
 		"SimpleBlogPageDisplay": {
-			"value": {
-				"leftcolumn": true,
-				"rightcolumn": true,
-				"author": true,
-				"author_articles": true,
-				"recent_editors": true,
-				"recent_voters": true,
-				"popular_articles": true,
-				"in_the_news": true,
-				"comments_of_day": false,
-				"games": true,
-				"new_articles": true
-			}
+			"leftcolumn": true,
+			"rightcolumn": true,
+			"author": true,
+			"author_articles": true,
+			"recent_editors": true,
+			"recent_voters": true,
+			"popular_articles": true,
+			"in_the_news": true,
+			"comments_of_day": false,
+			"games": true,
+			"new_articles": true
+		},
+		"UserProfileDisplay": {
+			"articles": true
 		}
 	},
 	"Hooks": {
 		"ArticleFromTitle": "SimpleBlogPageHooks::onArticleFromTitle",
 		"AlternateEdit": "SimpleBlogPageHooks::onAlternateEdit"
 	},
-	"manifest_version": 2
+	"manifest_version": 1
 }
