@@ -78,7 +78,7 @@ class SimpleBlogPage extends Article {
 		$user = $context->getUser();
 		$output = $context->getOutput();
 		
-		$sk = $context->getSkin();
+		$skin = $context->getSkin();
 
 		wfDebugLog( 'SimpleBlogPage', __METHOD__ );
 
@@ -99,7 +99,7 @@ class SimpleBlogPage extends Article {
 
 		$output->addHTML( "\t\t" . '<div id="blog-page-container">' . "\n" );
 
-		if ( $wgSimpleBlogPageDisplay['leftcolumn'] == true and $this->recentEditors() != '') {
+		if ( $skin->getSkinName() !== 'cosmos' && $wgSimpleBlogPageDisplay['leftcolumn'] == true && (bool)$this->recentEditors() ) {
 			$output->addHTML( "\t\t\t" . '<div id="blog-page-left">' . "\n" );
 
 			$output->addHTML( "\t\t\t\t" . '<div class="blog-left-units">' . "\n" );
@@ -134,7 +134,7 @@ class SimpleBlogPage extends Article {
 
 		// Get categories
 		// note from 1f604: This actually duplicates the categories that are naturally created by mediawiki, so I've commented it out.
-		//$cat = $sk->getCategoryLinks();
+		//$cat = $skin->getCategoryLinks();
 		//if ( $cat ) {
 		//	$output->addHTML( "\n<div id=\"catlinks\" class=\"catlinks\">{$cat}</div>\n" );
 		//}
@@ -276,11 +276,6 @@ class SimpleBlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function recentEditors() {
-		// If using the Cosmos skin, use the CosmosRail hook instead
-		if ( $this->getContext()->getSkin()->getSkinName() === 'cosmos' ) {
-			return '';
-		}
-
 		global $wgSimpleBlogPageDisplay;
 
 		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
