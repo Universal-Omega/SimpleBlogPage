@@ -82,4 +82,38 @@ class SimpleBlogPageHooks {
 
 		return true;
 	}
+
+	/**
+	 * @param CosmosRail $cosmosRail
+	 * @param Skin $skin
+	 */
+	public static function onCosmosRail( CosmosRail $cosmosRail, Skin $skin ) {
+		global $wgSimpleBlogPageDisplay;
+
+		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
+			return;
+		}
+
+		$simpleBlogPage = new SimpleBlogPage( $skin->getTitle() );
+
+		$editors = $simpleBlogPage->getEditorsList();
+
+		if ( count( $editors ) > 0 ) {
+			$output = '<div class="recent-container">';
+
+			foreach ( $editors as $editor ) {
+				$actor = User::newFromActorId( $editor['actor'] );
+				$actorname = $actor->getName();
+				$userTitle = Title::makeTitle( NS_USER, $actorname );
+
+
+				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
+					'">' . $actorname  . '</a></br>';
+			}
+
+			$output .= '</div>';
+
+			$cosmosRail->buildModule( $output, 'blog-recent-editors' );
+		}
+	}
 }
