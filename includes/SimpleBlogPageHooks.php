@@ -91,7 +91,10 @@ class SimpleBlogPageHooks {
 	public static function onCosmosRail( CosmosRail $cosmosRail, Skin $skin ) {
 		global $wgSimpleBlogPageDisplay;
 
-		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
+		if (
+			$skin->getTitle()->getNamespace() !== NS_USER_BLOG ||
+			$wgSimpleBlogPageDisplay['recent_editors'] === false
+		) {
 			return;
 		}
 
