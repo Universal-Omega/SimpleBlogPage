@@ -276,11 +276,16 @@ class SimpleBlogPage extends Article {
 	 * @return string HTML or nothing
 	 */
 	public function recentEditors() {
+		// If using the Cosmos skin, use the CosmosRail hook instead
+		if ( $this->getContext()->getSkin()->getSkinName() === 'cosmos' ) {
+			return '';
+		}
+
 		global $wgSimpleBlogPageDisplay;
 
-//		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
-//			return '';
-//		}
+		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
+			return '';
+		}
 
 		$editors = $this->getEditorsList();
 
