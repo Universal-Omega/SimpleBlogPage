@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin\Cosmos\CosmosRail;
 
 /**
  * All SimpleBlogPage's hooked functions. These were previously scattered all over
@@ -99,7 +100,7 @@ class SimpleBlogPageHooks {
 		$editors = $simpleBlogPage->getEditorsList();
 
 		if ( count( $editors ) > 0 ) {
-			$output = '<div class="recent-container">';
+			$content = '';
 
 			foreach ( $editors as $editor ) {
 				$actor = User::newFromActorId( $editor['actor'] );
@@ -107,13 +108,17 @@ class SimpleBlogPageHooks {
 				$userTitle = Title::makeTitle( NS_USER, $actorname );
 
 
-				$output .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
+				$content .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
 					'">' . $actorname  . '</a></br>';
 			}
 
-			$output .= '</div>';
+			if ( $content ) {
+				$header = 'blog-recent-editors';
+				$class = 'recent-container';
+				$type = 'normal';
 
-			$cosmosRail->buildModule( $output, 'blog-recent-editors' );
+				$cosmosRail->buildModule( $content, $header, $type, $class );
+			}
 		}
 	}
 }
