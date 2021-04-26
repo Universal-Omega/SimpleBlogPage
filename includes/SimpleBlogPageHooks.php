@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin\Cosmos\CosmosRail;
 
 /**
  * All SimpleBlogPage's hooked functions. These were previously scattered all over
@@ -81,5 +82,46 @@ class SimpleBlogPageHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param CosmosRail $cosmosRail
+	 * @param Skin $skin
+	 */
+	public static function onCosmosRail( CosmosRail $cosmosRail, Skin $skin ) {
+		global $wgSimpleBlogPageDisplay;
+
+		if (
+			$skin->getTitle()->getNamespace() !== NS_USER_BLOG ||
+			$wgSimpleBlogPageDisplay['recent_editors'] === false
+		) {
+			return;
+		}
+
+		$simpleBlogPage = new SimpleBlogPage( $skin->getTitle() );
+
+		$editors = $simpleBlogPage->getEditorsList();
+
+		if ( count( $editors ) > 0 ) {
+			$content = '';
+
+			foreach ( $editors as $editor ) {
+				$actor = User::newFromActorId( $editor['actor'] );
+				$actorname = $actor->getName();
+				$userTitle = Title::makeTitle( NS_USER, $actorname );
+
+
+				$content .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
+					'">' . $actorname  . '</a></br>';
+			}
+
+			if ( $content ) {
+				$header = 'blog-recent-editors';
+				$class = 'recent-container';
+				$type = 'normal';
+
+				$cosmosRail->buildModule( $content, $header, $type, $class );
+			}
+		}
 	}
 }
