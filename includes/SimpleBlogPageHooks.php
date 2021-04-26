@@ -17,26 +17,6 @@ class SimpleBlogPageHooks {
 	}
 
 	/**
-	 * Calls SimpleBlogPage instead of standard Article for pages in the NS_USER_BLOG
-	 * namespace.
-	 *
-	 * @param Title &$title
-	 * @param Article|SimpleBlogPage &$article Instance of Article that we convert into a SimpleBlogPage
-	 * @param RequestContext $context
-	 */
-	public static function onArticleFromTitle( Title &$title, &$article, $context ) {
-		if ( $title->getNamespace() == NS_USER_BLOG ) {
-			$out = $context->getOutput();
-			$out->enableClientCache( false );
-
-			// Add CSS
-			$out->addModuleStyles( 'ext.simpleBlogPage' );
-
-			$article = new SimpleBlogPage( $title );
-		}
-	}
-
-	/**
 	 * Checks that the user is logged is, is not blocked via Special:Block and has
 	 * the 'edit' user right when they're trying to edit a page in the NS_USER_BLOG NS.
 	 *
@@ -82,6 +62,26 @@ class SimpleBlogPageHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Calls SimpleBlogPage instead of standard Article for pages in the NS_USER_BLOG
+	 * namespace.
+	 *
+	 * @param Title &$title
+	 * @param Article|SimpleBlogPage &$article Instance of Article that we convert into a SimpleBlogPage
+	 * @param RequestContext $context
+	 */
+	public static function onArticleFromTitle( Title &$title, &$article, $context ) {
+		if ( $title->getNamespace() == NS_USER_BLOG ) {
+			$out = $context->getOutput();
+			$out->enableClientCache( false );
+
+			// Add CSS
+			$out->addModuleStyles( 'ext.simpleBlogPage' );
+
+			$article = new SimpleBlogPage( $title );
+		}
 	}
 
 	/**
