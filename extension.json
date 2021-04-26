@@ -108,8 +108,8 @@
 		}
 	},
 	"Hooks": {
-		"ArticleFromTitle": "SimpleBlogPageHooks::onArticleFromTitle",
 		"AlternateEdit": "SimpleBlogPageHooks::onAlternateEdit",
+		"ArticleFromTitle": "SimpleBlogPageHooks::onArticleFromTitle",
 		"CosmosRail": "SimpleBlogPageHooks::onCosmosRail"
 	},
 	"manifest_version": 2
