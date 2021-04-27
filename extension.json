@@ -21,7 +21,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"SimpleBlogPageAliases": "includes/SimpleBlogPageAliases.php",
+		"SimpleBlogPageAliases": "includes/specials/SimpleBlogPageAliases.php",
 		"SimpleBlogPageNamespaces": "includes/SimpleBlogPageNamespaces.php"
 	},
 	"AutoloadClasses": {
