@@ -5,7 +5,7 @@ if ( function_exists( 'wfLoadExtension' ) ) {
 
 	$wgMessagesDirs['SimpleBlogPage'] = __DIR__ . '/i18n';
 
-	$wgExtensionMessagesFiles['SimpleBlogPageAliases'] = __DIR__ . '/includes/SimpleBlogPageAliases.php';
+	$wgExtensionMessagesFiles['SimpleBlogPageAliases'] = __DIR__ . '/includes/specials/SimpleBlogPageAliases.php';
 	$wgExtensionMessagesFiles['SimpleBlogPageNamespaces'] = __DIR__ . '/includes/SimpleBlogPageNamespaces.php';
 
 	wfWarn(
