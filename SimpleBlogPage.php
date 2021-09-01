@@ -1,7 +1,7 @@
 <?php
 
 if ( function_exists( 'wfLoadExtension' ) ) {
-wfLoadExtension( 'SimpleBlogPage' );
+        wfLoadExtension( 'SimpleBlogPage' );
 
 	$wgMessagesDirs['SimpleBlogPage'] = __DIR__ . '/i18n';
 
