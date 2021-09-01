@@ -16,5 +16,5 @@
 			"phpcs -p -s",
 			"minus-x check ."
 		]
-	},
+	}
 }
