@@ -1,31 +1,60 @@
-name: "CI"
+name: MediaWiki CI
 
 on:
-  create:
   push:
+    branches:
+      - '**'
   pull_request:
-    paths:
-      - "**.php"
-      - "phpcs.xml"
-      - ".github/workflows/phpcs.yml"
+    branches:
+      - '**'
 
 jobs:
-  phpcs:
+  test:
+    name: Test and lint
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.4']
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # important!
+    - uses: actions/checkout@v2
+      
+    - name: Install dependencies
+      run: |
+        composer validate
+        npm install --save-dev
+        composer install --prefer-dist --no-progress
 
-      # we may use whatever way to install phpcs, just specify the path on the next step
-      # however, curl seems to be the fastest
-      - name: Install PHP_CodeSniffer
-        run: |
-          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          php phpcs.phar --version
+    # Bypass the phpcbf non-standard exit code  
+    - name: Check PHP
+      run: |
+        sh ./bin/phpcbf.sh
+        composer fix
+        composer test
 
-      - uses: tinovyatkin/action-php-codesniffer@v1
-        with:
-          files: "**.php" # you may customize glob as needed
-          phpcs_path: php phpcs.phar
-          standard: phpcs.xml
+    - name: Check Javascript
+      run: |
+        npm run lint:fix:js
+        npm run lint:js
+
+    - name: Check CSS/LESS
+      run: |
+        npm run lint:fix:styles
+        npm run lint:styles
+
+    - name: Check i18n
+      run: |
+        npm run lint:i18n
+
+    # Only patch code when it is a push event
+    - name: Push the changes
+      if: github.event_name == 'push'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@users.noreply.github.com"
+        git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        git add .
+        git commit -am "ci: lint code to MediaWiki standards" -m "Check commit and GitHub actions for more details" || echo "No changes to commit"
+        git pull --rebase
+        git push
