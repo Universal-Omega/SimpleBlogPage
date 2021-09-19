@@ -60,6 +60,7 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$formDescriptor['categories'] = [
 			'type' => 'multiselect',
 			'default' => [],
+			'options' => [],
 			'dropdown' => true,
 			'label-message' => 'blog-create-categories',
 			'help-message' => 'blog-create-category-help',
