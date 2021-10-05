@@ -28,7 +28,7 @@ class SimpleBlogPageHooks {
 		$output = $context->getOutput();
 		$user = $context->getUser();
 
-		$basetitle = $editPage->getTitle()->getBaseText();
+		$basetitle = $editPage->getTitle()->getRootText();
 
 		$isnewpost = !$editPage->getTitle()->exists();
 		$isnotowner = !( $basetitle === $user->getName() );
