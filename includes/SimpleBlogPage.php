@@ -30,7 +30,7 @@ class SimpleBlogPage extends Article {
 	 * Sets the 2 variables $AuthorName and $AuthorID.
 	 */
 	function getAuthor() {
-		$this->AuthorName = Title::newFromText( $this->getTitle()->getText() )->getRootText();
+		$this->AuthorName = Title::newFromText( $this->getTitle()->getRootTitle()->getText() )->getRootText();
 		$authorObj = User::newFromName( $this->AuthorName ); 
 		$this->AuthorID = $authorObj->getId();
 	}
