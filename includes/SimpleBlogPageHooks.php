@@ -75,7 +75,13 @@ class SimpleBlogPageHooks {
 	public static function onArticleFromTitle( Title &$title, &$article, $context ) {
 		if ( $title->getNamespace() == NS_USER_BLOG ) {
 			$out = $context->getOutput();
-			$out->enableClientCache( false );
+
+			if ( method_exists( $out, 'disableClientCache' ) ) {
+				// MW 1.38+
+				$out->disableClientCache();
+			} else {
+				$out->enableClientCache( false );
+			}
 
 			// Add CSS
 			$out->addModuleStyles( 'ext.simpleBlogPage' );
