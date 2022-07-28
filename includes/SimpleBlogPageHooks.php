@@ -1,7 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Skin\Cosmos\CosmosRail;
+use MediaWiki\Skins\Cosmos\CosmosRail;
 
 /**
  * All SimpleBlogPage's hooked functions. These were previously scattered all over
