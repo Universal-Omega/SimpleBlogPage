@@ -1,7 +1,6 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Skins\Cosmos\CosmosRail;
 
 /**
  * All SimpleBlogPage's hooked functions. These were previously scattered all over
@@ -91,10 +90,11 @@ class SimpleBlogPageHooks {
 	}
 
 	/**
-	 * @param CosmosRail $cosmosRail
+	 * @param array &$modules
 	 * @param Skin $skin
+	 * @return void
 	 */
-	public static function onCosmosRail( CosmosRail $cosmosRail, Skin $skin ) {
+	public static function onCosmosRailBuilder( array &$modules, Skin $skin ): void {
 		global $wgSimpleBlogPageDisplay;
 
 		if (
@@ -122,11 +122,12 @@ class SimpleBlogPageHooks {
 			}
 
 			if ( $content ) {
-				$header = 'blog-recent-editors';
-				$class = 'recent-container';
-				$type = 'normal';
-
-				$cosmosRail->buildModule( $content, $header, $type, $class );
+				$modules['SimpleBlogPage'] = [
+					'body' => $content,
+					'header' => 'blog-recent-editors',
+					'class' => 'recent-container',
+					'type' => 'normal',
+				];
 			}
 		}
 	}
