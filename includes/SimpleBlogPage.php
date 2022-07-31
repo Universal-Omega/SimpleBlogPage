@@ -273,9 +273,10 @@ class SimpleBlogPage extends Article {
 	 * Get the usernames of the people who recently edited this blog post, if
 	 * this feature is enabled in SimpleBlogPage config.
 	 *
+	 * @param bool $withHeader
 	 * @return string HTML or nothing
 	 */
-	public function recentEditors() {
+	public function recentEditors( bool $withHeader = true ) {
 		global $wgSimpleBlogPageDisplay;
 
 		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
@@ -287,8 +288,10 @@ class SimpleBlogPage extends Article {
 		$output = '';
 
 		if ( count( $editors ) > 0 ) {
-			$output .= '<div class="recent-container">
-			<h2>' . wfMessage( 'blog-recent-editors' )->escaped() . '</h2>';
+			if ( $withHeader ) {
+				$output .= '<div class="recent-container">
+				<h2>' . wfMessage( 'blog-recent-editors' )->escaped() . '</h2>';
+			}
 
 			foreach ( $editors as $editor ) {
 				$actor = User::newFromActorId( $editor['actor'] );
