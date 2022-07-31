@@ -110,7 +110,7 @@
 	"Hooks": {
 		"AlternateEdit": "SimpleBlogPageHooks::onAlternateEdit",
 		"ArticleFromTitle": "SimpleBlogPageHooks::onArticleFromTitle",
-		"CosmosRail": "SimpleBlogPageHooks::onCosmosRail"
+		"CosmosRailBuilder": "SimpleBlogPageHooks::onCosmosRailBuilder"
 	},
 	"manifest_version": 2
 }
