@@ -105,30 +105,15 @@ class SimpleBlogPageHooks {
 		}
 
 		$simpleBlogPage = new SimpleBlogPage( $skin->getTitle() );
+		$content = $simpleBlogPage->recentEditors();
 
-		$editors = $simpleBlogPage->getEditorsList();
-
-		if ( count( $editors ) > 0 ) {
-			$content = '';
-
-			foreach ( $editors as $editor ) {
-				$actor = User::newFromActorId( $editor['actor'] );
-				$actorname = $actor->getName();
-				$userTitle = Title::makeTitle( NS_USER, $actorname );
-
-
-				$content .= '<a href="' . htmlspecialchars( $userTitle->getFullURL() ) .
-					'">' . $actorname  . '</a></br>';
-			}
-
-			if ( $content ) {
-				$modules['SimpleBlogPage'] = [
-					'body' => $content,
-					'header' => 'blog-recent-editors',
-					'class' => 'recent-container',
-					'type' => 'normal',
-				];
-			}
+		if ( $content ) {
+			$modules['SimpleBlogPage'] = [
+				'body' => $content,
+				'header' => 'blog-recent-editors',
+				'class' => 'recent-container',
+				'type' => 'normal',
+			];
 		}
 	}
 }
