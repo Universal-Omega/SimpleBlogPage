@@ -273,10 +273,10 @@ class SimpleBlogPage extends Article {
 	 * Get the usernames of the people who recently edited this blog post, if
 	 * this feature is enabled in SimpleBlogPage config.
 	 *
-	 * @param bool $withHeader
+	 * @param bool $withContainer
 	 * @return string HTML or nothing
 	 */
-	public function recentEditors( bool $withHeader = true ) {
+	public function recentEditors( bool $withContainer = true ) {
 		global $wgSimpleBlogPageDisplay;
 
 		if ( $wgSimpleBlogPageDisplay['recent_editors'] == false ) {
@@ -288,7 +288,7 @@ class SimpleBlogPage extends Article {
 		$output = '';
 
 		if ( count( $editors ) > 0 ) {
-			if ( $withHeader ) {
+			if ( $withContainer ) {
 				$output .= '<div class="recent-container">
 				<h2>' . wfMessage( 'blog-recent-editors' )->escaped() . '</h2>';
 			}
@@ -303,7 +303,9 @@ class SimpleBlogPage extends Article {
 					'">' . $actorname  . '</a></br>';
 			}
 
-			$output .= '</div>';
+			if ( $withContainer ) {
+				$output .= '</div>';
+			}
 		}
 
 		return $output;
