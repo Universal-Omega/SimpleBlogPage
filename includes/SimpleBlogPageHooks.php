@@ -105,7 +105,7 @@ class SimpleBlogPageHooks {
 		}
 
 		$simpleBlogPage = new SimpleBlogPage( $skin->getTitle() );
-		$content = $simpleBlogPage->recentEditors();
+		$content = $simpleBlogPage->recentEditors( false );
 
 		if ( $content ) {
 			$modules['SimpleBlogPage'] = [
