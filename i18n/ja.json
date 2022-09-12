@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"MathXplore"
+		]
+	},
+	"blog-new-articles": "新しい記事",
+	"blog-permission-required": "新しいページを作成する権限がありません。",
+	"blog-recent-editors": "このページを編集した他の人",
+	"blog-view-archive-link": "すべて表示",
+	"articlelists": "新しいブログ記事",
+	"ah-no-results": "ページはありません。",
+	"ah-popular-articles": "人気の記事",
+	"ah-new-articles": "新しい記事",
+	"ah-all-posts": "すべてのブログ投稿",
+	"ah-rss-feed": "RSS フィード",
+	"ah-write-article": "記事を書く",
+	"ah-todays-articles": "今日の記事",
+	"articleshome": "すべてのブログ投稿",
+	"createblogpost": "ブログ投稿を作成する",
+	"blog-create-title": "タイトル",
+	"blog-create-text": "テキスト",
+	"blog-create-categories": "カテゴリ",
+	"blog-create-button": "作成",
+	"blog-more": "さらに読む",
+	"action-createblogpost": "新しいブログ投稿を作成する",
+	"blog-user-articles-title": "ブログ"
+}

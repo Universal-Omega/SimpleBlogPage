@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Robby",
 			"Universal Omega"
 		]
 	},
@@ -16,7 +17,6 @@
 	"blog-by-user-category": "A category name",
 	"blog-comments-of-day": "A header text",
 	"blog-created": "A text with date and time of last edit",
-	"blog-created-ago": "A text with date and time of last edit",
 	"blog-in-the-news": "A header text",
 	"blog-last-edited": "A text with date and time of last edit",
 	"blog-login": "Shown for anon user",
@@ -49,7 +49,7 @@
 	"blog-create-category-help": "A help text",
 	"blog-create-title": "A page header",
 	"blog-create-text": "A description text",
-	"blog-create-categories": "A title text",
+	"blog-create-categories": "A title text\n{{identical|Category}}",
 	"blog-create-button": "A button text",
 	"blog-create-summary": "An edit summary",
 	"blog-create-error-page-exists": "An error message",
