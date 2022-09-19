@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kly",
 			"Lakejason0"
 		]
 	},
@@ -62,7 +63,7 @@
 	"blog-time-minutes": "$1{{PLURAL:$1|分鐘}}",
 	"blog-time-seconds": "$1{{PLURAL:$1|秒}}",
 	"action-createblogpost": "建立新的部落格文章",
-	"right-createblogpost": "新建部落格文章",
+	"right-createblogpost": "[[Special:CreateBlogPost|新建部落格文章]]",
 	"blog-user-articles-title": "部落格文章",
 	"blog-user-articles-votes": "$1{{PLURAL:$1|張票}}",
 	"blog-user-article-comment": "$1{{PLURAL:$1|則評論}}"

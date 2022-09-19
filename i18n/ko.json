@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"blog-new-articles": "새 글",
+	"blog-view-archive-link": "모두 보기",
+	"articlelists": "새 블로그 글",
+	"ah-new-articles": "새 글",
+	"ah-all-posts": "모든 블로그 게시물",
+	"ah-rss-feed": "RSS 피드",
+	"ah-write-article": "글 쓰기",
+	"articleshome": "모든 블로그 게시물",
+	"createblogpost": "블로그 글 만들기",
+	"blog-create-rules": "-",
+	"blog-tagcloud-blacklist": "-",
+	"blog-create-text": "텍스트",
+	"blog-create-categories": "분류",
+	"blog-time-ago": "$1 전",
+	"blog-time-hours": "{{PLURAL:$1|1시간|$1시간}}",
+	"action-createblogpost": "새 블로그 글을 만들",
+	"blog-user-articles-title": "블로그"
+}
