@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardoaddad"
+		]
+	},
+	"blog-anonymous-name": "Fanático anônimo",
+	"blog-author-comments": "$1 {{PLURAL:$1|comentário|comentários}}",
+	"blog-author-more-by": "Mais de $1",
+	"blog-author-title": "Sobre o {{PLURAL:$1|autor|autores}}",
+	"blog-author-votes": "$1 {{PLURAL:$1|voto|votos}}",
+	"blog-by": "por",
+	"blog-comments-of-day": "Comentários do dia",
+	"blog-last-edited": "ultima edição $1",
+	"blog-login": "Você tem que [[Special:UserLogin|entrar]] para criar artigos.",
+	"blog-popular-articles": "Não perca",
+	"blog-multiple-authors": "Este artigo foi escrito em colaboração por $1",
+	"blog-view-archive-link": "Ver tudo",
+	"articlelists": "Novos artigos de blog",
+	"ah-no-results": "Não foi encontrada nenhuma página.",
+	"ah-new-articles": "Novos artigos",
+	"ah-rss-feed": "Feed RSS",
+	"ah-write-article": "Escrever um artigo",
+	"ah-todays-articles": "Artigos de hoje",
+	"ah-most-votes": "Mais votos (72 horas)",
+	"ah-what-talking-about": "Mais comentários (72 horas)",
+	"blog-create-title": "Título",
+	"blog-create-text": "Texto",
+	"blog-create-button": "Criado!",
+	"blog-create-summary": "Nova postagem do blog criada.",
+	"blog-create-error-page-exists": "'''Erro:''' Já existe uma postagem no blog com esse título. Escolha um título diferente para a sua postagem no blog.",
+	"blog-time-ago": "$1 atrás",
+	"blog-time-hours": "{{PLURAL:$1|uma hora|$1 horas}}",
+	"blog-time-seconds": "{{PLURAL:$1|um segundo|$1 segundos}}",
+	"blog-user-articles-title": "Blogs",
+	"blog-user-articles-votes": "{{PLURAL:$1|um voto|$1 votos}}",
+	"blog-user-article-comment": "{{PLURAL:$1|um comentário|$1 comentários}}"
+}
