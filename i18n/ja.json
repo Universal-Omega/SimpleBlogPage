@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"MathXplore"
+			"MathXplore",
+			"Mugenpman"
 		]
 	},
+	"blog-and": "と",
+	"blog-by-user-category": "$1によって執筆された記事",
 	"blog-new-articles": "新しい記事",
 	"blog-permission-required": "新しいページを作成する権限がありません。",
 	"blog-recent-editors": "このページを編集した他の人",
@@ -23,6 +26,7 @@
 	"blog-create-categories": "カテゴリ",
 	"blog-create-button": "作成",
 	"blog-more": "さらに読む",
+	"blog-time-minutes": "{{PLURAL:$1|1分|$1分}}",
 	"action-createblogpost": "新しいブログ投稿を作成する",
 	"blog-user-articles-title": "ブログ"
 }

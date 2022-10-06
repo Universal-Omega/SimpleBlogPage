@@ -48,6 +48,7 @@
 	"blog-create-error-page-exists": "'''Napaka:''' V blogu že obstaja objava s tem naslovom. Izberite drug naslov za objavo v blogu.",
 	"blog-more": "preberi še kaj",
 	"blog-time-ago": "pred $1",
+	"blog-time-minutes": "{{PLURAL:$1|ena minuta|$1 minuti|$1 minute|$1 minut}}",
 	"action-createblogpost": "ustvarjanje novih objav bloga",
 	"right-createblogpost": "[[Special:CreateBlogPost|Ustvarjanje novih objav bloga]]",
 	"blog-user-articles-title": "Blogi"

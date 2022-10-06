@@ -39,7 +39,7 @@
 	"blog-more": "לקרוא עוד",
 	"blog-time-ago": "לפני $1",
 	"blog-time-minutes": "{{PLURAL:$1|דקה|$1 דקות}}",
-	"right-createblogpost": "[[Special:CreateBlogPost|יצירת פוסטים חדשים בבלוג]]",
+	"right-createblogpost": "[[Special:CreateBlogPost|יצירת רשומות חדשות בבלוג]]",
 	"blog-user-articles-title": "בלוגים",
 	"blog-user-article-comment": "{{PLURAL:$1|הערה אחת|$1 הערות}}"
 }
