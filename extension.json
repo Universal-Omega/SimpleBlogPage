@@ -1,6 +1,6 @@
 {
 	"name": "SimpleBlogPage",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"author": [
 		"Universal Omega",
 		"David Pean",
@@ -11,7 +11,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
 	"descriptionmsg": "simpleblogpage-desc",
 	"requires": {
-		"MediaWiki": ">= 1.35.0"
+		"MediaWiki": ">= 1.36.0"
 	},
 	"type": "other",
 	"callback": "SimpleBlogPageHooks::onRegistration",
