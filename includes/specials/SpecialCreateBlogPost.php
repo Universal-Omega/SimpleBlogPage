@@ -8,6 +8,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
 
 class SpecialCreateBlogPost extends FormSpecialPage {
 	public function __construct() {
@@ -21,11 +22,11 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$formDescriptor = [];
 		$out = $this->getOutput();
 		
-		$out->addModuleStyles( 'ext.simpleBlogPage.create.css' );
-		$out->addModules( 'ext.simpleBlogPage.create.js' );
+		$out->addModuleStyles( [ 'ext.simpleBlogPage.create.css' ] );
+		$out->addModules( [ 'ext.simpleBlogPage.create.js' ] );
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikiEditor' ) && $this->getContext()->getUser()->getOption( 'usebetatoolbar' ) ) {
-			$out->addModules( 'ext.wikiEditor' );
+			$out->addModules( [ 'ext.wikiEditor' ] );
 		}
 
 		$cloud = new BlogTagCloud( 1000 );
@@ -105,96 +106,104 @@ class SpecialCreateBlogPost extends FormSpecialPage {
 		$today = $contLang->date( wfTimestampNow() );
 
 		// Create the blog page if it doesn't already exist
-		$page = WikiPage::factory( $title );
+		$page = $services->getWikiPageFactory()->newFromTitle( $title );
+
 		if ( $page->exists() ) {
 			$out->setPageTitle( $this->msg( 'errorpagetitle' ) );
 			$out->addWikiMsg( 'blog-create-error-page-exists' );
+
 			return;
-			} elseif ( $formData['preview'] ?? 0 ) {
-				// Previewing a blog post
-				$out->setPageTitle( $this->msg( 'preview' ) );
-				$out->addHTML(
-					'<div class="previewnote"><p>' .
-					Html::warningBox( $this->msg( 'previewnote' )->text() ) .
-					'</p></div>'
+		} elseif ( $formData['preview'] ?? 0 ) {
+			// Previewing a blog post
+			$out->setPageTitle( $this->msg( 'preview' ) );
+			$out->addHTML(
+				'<div class="previewnote"><p>' .
+				Html::warningBox( $this->msg( 'previewnote' )->text() ) .
+				'</p></div>'
+			);
+
+			if ( $user->isAnon() ) {
+				$out->wrapWikiMsg(
+					"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
+					'anonpreviewwarning'
 				);
-				if ( $user->isAnon() ) {
-					$out->wrapWikiMsg(
-						"<div id=\"mw-anon-preview-warning\" class=\"warningbox\">\n$1</div>",
-						'anonpreviewwarning'
-					);
-				}
+			}
 
-				// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
-				$userSuppliedTitle = $formData['title'];
-				$title = Title::makeTitleSafe( NS_USER_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
+			// Modeled after CreateAPage's CreatePageCreateplateForm#showPreview
+			$userSuppliedTitle = $formData['title'];
+			$title = Title::makeTitleSafe( NS_USER_BLOG, $this->getUser()->getName() . $userSuppliedTitle );
 
-				if ( is_object( $title ) ) {
-					$parser = $services->getParser();
-					$parserOptions = ParserOptions::newFromUser( $user );
-					$preparsed = $parser->preSaveTransform(
-						$formData['content'], // We're intentionally ignoring categories (etc.) here
-						$title,
-						$user,
-						$parserOptions,
-						true
-					);
+			if ( is_object( $title ) ) {
+				$parser = $services->getParser();
+				$parserOptions = ParserOptions::newFromUser( $user );
+				$preparsed = $parser->preSaveTransform(
+					$formData['content'], // We're intentionally ignoring categories (etc.) here
+					$title,
+					$user,
+					$parserOptions,
+					true
+				);
 
-					$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
+				$previewableText = $out->parseAsContent( $preparsed ); // $parserOutput->getText( [ 'enableSectionEditLinks' => false ] );
 
-					$out->addHTML( $previewableText );
-				}
-				return;
-			} else {
-				// The blog post will be by default categorized into two
-				// categories, "Articles by User $1" and "(today's date)",
-				// but the user may supply some categories themselves, so
-				// we need to take those into account, too.
-				$categories = [
-					'[[' . $localizedCatNS . ':' .
-						$this->msg(
-							'blog-by-user-category',
-							$this->getUser()->getName()
-						)->inContentLanguage()->text() .
-					']]' . "\n" .
-					"[[{$localizedCatNS}:{$today}]]"
-				];
+				$out->addHTML( $previewableText );
+			}
 
-				$userSuppliedCategories = $formData['categories'];
-				if ( !empty( $userSuppliedCategories ) ) {
-					// Explode along commas so that we will have an array that
-					// we can loop over
-					foreach ( $userSuppliedCategories as $cat ) {
-						$cat = trim( $cat ); // GTFO@excess whitespace
-						if ( !empty( $cat ) ) {
-							$categories[] = "[[{$localizedCatNS}:{$cat}]]";
-						}
+			return;
+		} else {
+			// The blog post will be by default categorized into two
+			// categories, "Articles by User $1" and "(today's date)",
+			// but the user may supply some categories themselves, so
+			// we need to take those into account, too.
+			$categories = [
+				'[[' . $localizedCatNS . ':' .
+					$this->msg(
+						'blog-by-user-category',
+						$this->getUser()->getName()
+					)->inContentLanguage()->text() .
+				']]' . "\n" .
+				"[[{$localizedCatNS}:{$today}]]"
+			];
+
+			$userSuppliedCategories = $formData['categories'];
+			if ( !empty( $userSuppliedCategories ) ) {
+				// Explode along commas so that we will have an array that
+				// we can loop over
+				foreach ( $userSuppliedCategories as $cat ) {
+					$cat = trim( $cat ); // GTFO@excess whitespace
+					if ( !empty( $cat ) ) {
+						$categories[] = "[[{$localizedCatNS}:{$cat}]]";
 					}
 				}
-
-				// Convert the array into a string
-				$wikitextCategories = implode( "\n", $categories );
-
-				// Perform the edit
-				$pageContent = ContentHandler::makeContent(
-					// Instead of <vote />, Wikia had Template:Blog Top over
-					// here and Template:Blog Bottom at the bottom, where we
-					// have the comments tag right now
-					'<!--start text-->' . "\n" .
-						$formData['content'] . "\n\n" .
-						$wikitextCategories .
-						"\n__NOEDITSECTION__",
-					$page->getTitle()
-				);
-				
-				$page->doEditContent(
-					$pageContent,
-					$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
-				);
-
-				// Redirect the user to the new blog post they just created
-				$out->redirect( $title->getFullURL() );
 			}
+
+			// Convert the array into a string
+			$wikitextCategories = implode( "\n", $categories );
+
+			// Perform the edit
+			$pageContent = $page->getContentHandler()->makeContent(
+				// Instead of <vote />, Wikia had Template:Blog Top over
+				// here and Template:Blog Bottom at the bottom, where we
+				// have the comments tag right now
+				'<!--start text-->' . "\n" .
+					$formData['content'] . "\n\n" .
+					$wikitextCategories .
+					"\n__NOEDITSECTION__",
+				$page->getTitle()
+			);
+
+			$updater = $page->newPageUpdater( $this->getUser() );
+			$updater->setContent( SlotRecord::MAIN, $pageContent );
+
+			$comment = CommentStoreComment::newUnsavedComment(
+				$this->msg( 'blog-create-summary' )->inContentLanguage()->text()
+			);
+
+			$updater->saveRevision( $comment, EDIT_NEW );
+
+			// Redirect the user to the new blog post they just created
+			$out->redirect( $title->getFullURL() );
+		}
 
 		return true;
 	}
