@@ -83,7 +83,7 @@ class SimpleBlogPageHooks {
 			}
 
 			// Add CSS
-			$out->addModuleStyles( 'ext.simpleBlogPage' );
+			$out->addModuleStyles( [ 'ext.simpleBlogPage' ] );
 
 			$article = new SimpleBlogPage( $title );
 		}

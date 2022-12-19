@@ -42,7 +42,7 @@ class SimpleBlogPage extends Article {
 	 */
 	function showUserPosts( $user, $output ) {
 		// Add CSS
-		$output->addModuleStyles( 'ext.simpleBlogPage.articlesHome' );
+		$output->addModuleStyles( [ 'ext.simpleBlogPage.articlesHome' ] );
 
 		// Determine the page title and set it
 		$name = wfMessage( 'ah-all-posts' );
@@ -80,6 +80,8 @@ class SimpleBlogPage extends Article {
 		
 		$skin = $context->getSkin();
 
+		$services = MediaWikiServices::getInstance();
+
 		wfDebugLog( 'SimpleBlogPage', __METHOD__ );
 
 		// Show the user's list of blog posts when viewing User_blog:Username
@@ -92,7 +94,7 @@ class SimpleBlogPage extends Article {
 
 		// Don't throw a bunch of E_NOTICEs when we're viewing the page of a
 		// nonexistent blog post
-		if ( !WikiPage::factory( $this->getTitle() )->getID() ) {
+		if ( !$services->getWikiPageFactory()->newFromTitle( $this->getTitle() )->getID() ) {
 			parent::view();
 			return '';
 		}
@@ -158,15 +160,15 @@ class SimpleBlogPage extends Article {
 	 * @return int Page creation date
 	 */
 	public static function getCreateDate( $pageId ) {
-			wfDebugLog( 'SimpleBlogPage', "Loading create_date for page {$pageId} from database" );
-			$dbr = wfGetDB( DB_REPLICA );
-			$createDate = $dbr->selectField(
-				'revision',
-				'rev_timestamp', // 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
-				[ 'rev_page' => $pageId ],
-				__METHOD__,
-				[ 'ORDER BY' => 'rev_timestamp ASC' ]
-			);
+		wfDebugLog( 'SimpleBlogPage', "Loading create_date for page {$pageId} from database" );
+		$dbr = wfGetDB( DB_REPLICA );
+		$createDate = $dbr->selectField(
+			'revision',
+			'rev_timestamp', // 'UNIX_TIMESTAMP(rev_timestamp) AS create_date',
+			[ 'rev_page' => $pageId ],
+			__METHOD__,
+			[ 'ORDER BY' => 'rev_timestamp ASC' ]
+		);
 
 		return $createDate;
 	}
@@ -179,18 +181,19 @@ class SimpleBlogPage extends Article {
 	 */
 	public function getByLine() {
 		$lang = $this->getContext()->getLanguage();
+		$services = MediaWikiServices::getInstance();
 
 		$count = 0;
 
 		// Get date of last edit
-		$timestamp = WikiPage::factory( $this->getTitle() )->getTimestamp();
+		$timestamp = $services->getWikiPageFactory()->newFromTitle( $this->getTitle() )->getTimestamp();
 		$edit_time = [];
 		$edit_time['date'] = $lang->date( $timestamp, true );
 		$edit_time['time'] = $lang->time( $timestamp, true );
 		$edit_time['datetime'] = $lang->timeanddate( $timestamp, true );
 
 		// Get date of when article was created
-		$timestamp = self::getCreateDate( WikiPage::factory( $this->getTitle() )->getID() );
+		$timestamp = self::getCreateDate( $services->getWikiPageFactory()->newFromTitle( $this->getTitle() )->getID() );
 		$create_time = [];
 		$create_time['date'] = $lang->date( $timestamp, true );
 		$create_time['time'] = $lang->time( $timestamp, true );
@@ -198,7 +201,7 @@ class SimpleBlogPage extends Article {
 
 		$output = '<div class="blog-byline">' . wfMessage( 'blog-by' )->escaped() . ' ';
 
-		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$linkRenderer = $services->getLinkRenderer();
 		$authors = $linkRenderer->makeKnownLink( Title::newFromText( $this->AuthorName, NS_USER_BLOG ), $this->AuthorName );
 
 		$output .= $authors;
@@ -233,7 +236,9 @@ class SimpleBlogPage extends Article {
 	 * @return array Array containing each editors' user ID and user name
 	 */
 	public function getEditorsList() {
-		$pageTitleId = WikiPage::factory( $this->getTitle() )->getID();
+		$services = MediaWikiServices::getInstance();
+
+		$pageTitleId = $services->getWikiPageFactory()->newFromTitle( $this->getTitle() )->getID();
 		$editors = [];
 
 		wfDebugLog( 'SimpleBlogPage', "Loading recent editors for page {$pageTitleId} from DB" );
