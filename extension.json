@@ -11,7 +11,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:SimpleBlogPage",
 	"descriptionmsg": "simpleblogpage-desc",
 	"requires": {
-		"MediaWiki": ">= 1.36.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"type": "other",
 	"callback": "SimpleBlogPageHooks::onRegistration",
