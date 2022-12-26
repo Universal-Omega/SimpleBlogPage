@@ -5,6 +5,7 @@
 			"מקף"
 		]
 	},
+	"simpleblogpage-desc": "מערכת בלוגים עם אפשרויות תגובה והצבעה, [[Special:CreateBlogPost|דף מיוחד ליצירת רשומות בבלוג]] ו[[Special:ArticlesHome|דף מיוחד להצגת כל הרשומות בבלוג]]",
 	"blog-and": "וגם",
 	"blog-author-more-by": "עוד מאת $1",
 	"blog-by": "מאת",
@@ -26,6 +27,7 @@
 	"game-unit-poll-title": "השתתפות בסקר",
 	"game-unit-picturegame-title": "לשחק במשחק התמונות",
 	"ah-popular-articles": "ערכים פופלריים",
+	"ah-all-posts": "כל רשומות הבלוג",
 	"ah-rss-feed": "הזנת RSS",
 	"ah-write-article": "כתיבת ערך",
 	"ah-most-votes": "הכי הרבה הצבעות (72 שעות)",
@@ -36,9 +38,12 @@
 	"blog-create-text": "טקסט",
 	"blog-create-categories": "קטגוריות",
 	"blog-create-button": "יצירה!",
+	"blog-create-summary": "נוצרה רשומה חדשה בבלוג.",
+	"blog-create-error-page-exists": "'''שגיאה:''' יש כבר רשומה בבלוג עם הכותרת הזאת. נא לבחור כותרת אחרת לרשומת הבלוג שלך.",
 	"blog-more": "לקרוא עוד",
 	"blog-time-ago": "לפני $1",
 	"blog-time-minutes": "{{PLURAL:$1|דקה|$1 דקות}}",
+	"action-createblogpost": "ליצור רשומות חדשות בבלוג",
 	"right-createblogpost": "[[Special:CreateBlogPost|יצירת רשומות חדשות בבלוג]]",
 	"blog-user-articles-title": "בלוגים",
 	"blog-user-article-comment": "{{PLURAL:$1|הערה אחת|$1 הערות}}"
