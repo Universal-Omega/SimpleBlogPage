@@ -245,7 +245,7 @@ class SimpleBlogPage extends Article {
 		$dbr = wfGetDB( DB_REPLICA );
 
 		$where = [
-			'revactor_page' => $pageTitleId,
+			'rev_page' => $pageTitleId,
 			'actor_user IS NOT NULL', // exclude anonymous editors
 			"actor_name <> 'MediaWiki default'", // exclude MW default
 		];
@@ -254,20 +254,19 @@ class SimpleBlogPage extends Article {
 		$where[] = 'actor_user <> ' . $this->AuthorID;
 
 		$res = $dbr->select(
-			[ 'revision_actor_temp', 'revision', 'actor' ],
-			[ 'DISTINCT revactor_actor', 'actor_name' ],
+			[ 'revision', 'actor' ],
+			[ 'DISTINCT rev_actor', 'actor_name' ],
 			$where,
 			__METHOD__,
 			[ 'ORDER BY' => 'actor_name ASC', 'LIMIT' => 1000000000 ],
 			[
-				'actor' => [ 'JOIN', 'actor_id = revactor_actor' ],
-				'revision_actor_temp' => [ 'JOIN', 'revactor_rev = rev_id' ]
+				'actor' => [ 'JOIN', 'actor_id = rev_actor' ]
 			]
 		);
 
 		foreach ( $res as $row ) {
 			$editors[] = [
-				'actor' => $row->revactor_actor
+				'actor' => $row->rev_actor
 			];
 		}
 
