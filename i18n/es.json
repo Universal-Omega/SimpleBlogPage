@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ciencia Al Poder",
-			"Csbotero"
+			"Csbotero",
+			"McDutchie"
 		]
 	},
 	"simpleblogpage-desc": "Sistema de Blog con funcionalidades de comentarios y valoraciones, [[Special:CreateBlogPost|una página especial para publicar entradas de blog]] y [[Special:ArticlesHome|una página especial para listar entradas de blog]]",
@@ -44,7 +45,7 @@
 	"ah-what-talking-about": "Más comentados (72 horas)",
 	"articleshome": "Página de inicio de blog",
 	"createblogpost": "Crear una entrada de blog",
-	"blog-create-category-help": "Las categorías ayudan a organizar la información en el sitio. Para agregar múltiples categorías, separa cada una con una coma.",
+	"blog-create-category-help": "Las categorías ayudan a organizar la información en el sitio.",
 	"blog-create-title": "Título",
 	"blog-create-text": "Texto",
 	"blog-create-categories": "Categorías",
