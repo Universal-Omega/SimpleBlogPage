@@ -64,6 +64,6 @@
 	"action-createblogpost": "ustvarjanje novih blogovskih objav",
 	"right-createblogpost": "[[Special:CreateBlogPost|Ustvarjanje novih blogovskih objav]]",
 	"blog-user-articles-title": "Blogi",
-	"blog-user-articles-votes": "{{PLURAL:$1|en glas|$$1 glasova|$1 glasovi|$1 glasov}}",
+	"blog-user-articles-votes": "{{PLURAL:$1|en glas|$1 glasova|$1 glasovi|$1 glasov}}",
 	"blog-user-article-comment": "{{PLURAL:$1|en komentar|$1 komentarja|$1 komentarji|$1 komentarjev}}"
 }
