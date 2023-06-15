@@ -13,8 +13,6 @@
 	"ah-write-article": "글 쓰기",
 	"articleshome": "모든 블로그 게시물",
 	"createblogpost": "블로그 글 만들기",
-	"blog-create-rules": "-",
-	"blog-tagcloud-blacklist": "-",
 	"blog-create-text": "텍스트",
 	"blog-create-categories": "분류",
 	"blog-time-ago": "$1 전",
