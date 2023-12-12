@@ -47,17 +47,25 @@ class SimpleBlogPageHooks {
 				return false;
 			}
 
-			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
-				$output->addWikiMsg( 'blog-permission-required' );
-
+			if ( $user->isBlocked() ) {
+				$output->addWikiMsg( 'user-blocked' );
 				return false;
 			}
 
 			if ( $isnewpost && $isnotowner ) {
 				$output->addWikiMsg( 'blog-newpost-denied' );
-
 				return false;
 			}
+			
+			if ( $isnotowner && !$user->isAllowed( 'blogmodedit' ) ) {
+				$output->addWikiMsg( 'blog-edit-denied' );
+				return false;
+			}
+			
+			if ( $isnotowner && $user->isAllowed( 'blogmodedit' ) ) {
+				return true;
+			}
+			
 		}
 
 		return true;

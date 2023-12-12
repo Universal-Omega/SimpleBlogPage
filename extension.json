@@ -37,7 +37,8 @@
 		}
 	},
 	"AvailableRights": [
-		"createblogpost"
+		"createblogpost",
+		"blogmodedit"
 	],
 	"namespaces": [
 		{
