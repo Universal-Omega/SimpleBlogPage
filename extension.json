@@ -37,18 +37,19 @@
 		}
 	},
 	"AvailableRights": [
-		"createblogpost"
+		"createblogpost",
+		"blogmodedit"
 	],
 	"namespaces": [
 		{
-			"id": 502,
+			"id": 500,
 			"constant": "NS_USER_BLOG",
 			"name": "User_blog",
 			"protection": "edit",
 			"subpages": true
 		},
 		{
-			"id": 503,
+			"id": 501,
 			"constant": "NS_USER_BLOG_TALK",
 			"name": "User_blog_talk",
 			"subpages": true
