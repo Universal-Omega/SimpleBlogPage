@@ -47,8 +47,8 @@ class SimpleBlogPageHooks {
 				return false;
 			}
 
-			if ( $user->isBlocked() ) {
-				$output->addWikiMsg( 'user-blocked' );
+			if ( !$user->isAllowed( 'edit' ) || $user->isBlocked() ) {
+				$output->addWikiMsg( 'blog-permission-required' );
 				return false;
 			}
 
@@ -62,7 +62,7 @@ class SimpleBlogPageHooks {
 				return false;
 			}
 			
-			if ( $isnotowner && $user->isAllowed( 'blogmodedit' ) ) {
+			if ( $isnotowner || $user->isAllowed( 'blogmodedit' ) ) {
 				return true;
 			}
 			
