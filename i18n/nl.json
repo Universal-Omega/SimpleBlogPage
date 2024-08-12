@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"SPQRobin"
+		]
+	},
+	"blog-and": "en",
+	"blog-in-the-news": "In het nieuws",
+	"blog-last-edited": "laatst bewerkt op $1",
+	"blog-new-articles": "Nieuwe artikelen",
+	"blog-permission-required": "U heeft geen toestemming om artikelen aan te maken.",
+	"ah-no-results": "Geen pagina's gevonden.",
+	"ah-popular-articles": "Populaire artikelen",
+	"ah-new-articles": "Nieuwe artikelen",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Tekst",
+	"blog-create-categories": "Categorieën",
+	"blog-create-button": "Aanmaken!",
+	"blog-create-summary": "Nieuwe blogpost aangemaakt.",
+	"blog-create-error-page-exists": "'''Fout:''' Er is al een blogartikel met die titel. Kies een andere titel.",
+	"blog-more": "meer lezen",
+	"blog-time-ago": "$1 geleden",
+	"blog-time-days": "{{PLURAL:$1|één dag|$1 dagen}}",
+	"blog-time-hours": "{{PLURAL:$1|één uur|$1 uren}}",
+	"blog-time-minutes": "{{PLURAL:$1|één minuut|$1 minuten}}",
+	"blog-time-seconds": "{{PLURAL:$1|één seconde|$1 seconden}}"
+}
