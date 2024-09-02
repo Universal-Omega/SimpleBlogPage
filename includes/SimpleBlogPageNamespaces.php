@@ -9,14 +9,14 @@ $namespaceNames = [];
 
 // For wikis where the SimpleBlogPage extension is not installed.
 if ( !defined( 'NS_USER_BLOG' ) ) {
-	define( 'NS_USER_BLOG', 502 );
+	define( 'NS_USER_BLOG', 500 );
 }
 
 if ( !defined( 'NS_USER_BLOG_TALK' ) ) {
-	define( 'NS_USER_BLOG_TALK', 503 );
+	define( 'NS_USER_BLOG_TALK', 501 );
 }
 
-$wgNamespacesWithSubpages[502] = true;
+$wgNamespacesWithSubpages[500] = true;
 
 /** English */
 $namespaceNames['en'] = [
