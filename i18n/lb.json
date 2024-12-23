@@ -1,26 +1,45 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
+	"blog-and": "a(n)",
+	"blog-anonymous-name": "Anonymme Fanatiker",
 	"blog-author-comments": "$1 {{PLURAL:$1|Bemierkung|Bemierkungen}}",
+	"blog-author-more-by": "Méi vum $1",
 	"blog-author-votes": "({{PLURAL:$1|Stëmm|Stëmmen}})",
+	"blog-by": "vum",
 	"blog-by-user-category": "Artikele vum Benotzer $1",
 	"blog-in-the-news": "An den Neiegkeeten",
 	"blog-last-edited": "lescht Ännerung $1",
 	"blog-new-articles": "Nei Artikelen",
 	"blog-view-archive-link": "All weisen",
+	"articlelists": "Nei Blogartikelen",
 	"ah-no-results": "Keng Säite fonnt.",
 	"ah-popular-articles": "Beléift Artikelen",
 	"ah-new-articles": "Nei Artikelen",
+	"ah-all-posts": "All Blogbäiträg",
+	"ah-rss-feed": "RSS-Feed",
 	"ah-write-article": "Schreift een Artikel",
+	"articleshome": "All Blogbäiträg",
+	"createblogpost": "Blogbäitrag uleeën",
+	"blog-create-category-help": "Kategorien hëllefen dobäi fir Informatiounen op der Säit z'organiséieren.",
 	"blog-create-title": "Titel",
 	"blog-create-text": "Text",
 	"blog-create-categories": "Kategorien",
+	"blog-create-button": "Uleeën!",
+	"blog-create-summary": "Neie Blogbäitrag ugeluecht.",
+	"blog-create-error-page-exists": "'''Feeler:''' Et gëtt schonn e Blogbäitrag mat dësem Titel. Sicht Iech wgl. en aneren Titel fir Äre Blogbäitrag eraus.",
 	"blog-more": "Liest méi",
 	"blog-time-ago": "viru(n) $1",
+	"blog-time-days": "{{PLURAL:$1|een Dag|$1 Deeg}}",
 	"blog-time-hours": "{{PLURAL:$1|eng Stonn|$1 Stonnen}}",
 	"blog-time-minutes": "{{PLURAL:$1|eng Minutt|$1 Minutten}}",
-	"blog-time-seconds": "{{PLURAL:$1|eng Sekonn|$1 Sekonnen}}"
+	"blog-time-seconds": "{{PLURAL:$1|eng Sekonn|$1 Sekonnen}}",
+	"action-createblogpost": "nei Blogbäiträg uleeën",
+	"right-createblogpost": "[[Special:CreateBlogPost|Nei Blogbäiträg uleeën]]",
+	"blog-user-articles-votes": "({{PLURAL:$1|eng Stëmm|$1 Stëmmen}})",
+	"blog-user-article-comment": "{{PLURAL:$1|eng Bemierkung|$1 Bemierkungen}}"
 }
