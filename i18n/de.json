@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"PretzelRocky"
+		]
+	},
+	"simpleblogpage-desc": "Ein Blog-System mit Kommentar- und Abstimmungsfunktionen, [[Special:CreateBlogPost|einer Spezialseite für das Erstellen von Blogeinträgen]] und [[Special:ArticlesHome|einer Spezialseite, um Blogeinträge aufzulisten]].",
+	"blog-and": "und",
+	"blog-anonymous-name": "Anonymer Fanatiker",
+	"blog-author-more-by": "Mehr von $1",
+	"blog-author-points": "$1 Punkte",
+	"blog-author-title": "Über {{PLURAL:$1|den Autor|die Autoren}}",
+	"blog-author-votes": "$1 {{PLURAL:$1|Stimme|Stimmen}}",
+	"blog-by": "von",
+	"blog-by-user-category": "Artikel von Benutzer $1",
+	"blog-comments-of-day": "Kommentare des Tages",
+	"blog-created": "Erstellt am $1",
+	"blog-last-edited": "Zuletzt bearbeitet am $1",
+	"blog-login": "Du musst dich [[Special:UserLogin|anmelden]], um Artikel zu erstellen.",
+	"blog-login-edit": "Du musst dich [[Special:UserLogin|anmelden]], um Blogeinträge zu bearbeiten.",
+	"blog-new-articles": "Neue Artikel",
+	"blog-newpost-denied": "Du kannst keine Blogeinträge unter dem Benutzernamen eines anderen Benutzers erstellen.",
+	"blog-popular-articles": "Nicht verpassen",
+	"blog-multiple-authors": "Dieser Artikel wurde kollaborativ geschrieben von $1",
+	"blog-recent-editors": "Weitere Benutzer, die diese Seite bearbeitet haben",
+	"blog-recent-editors-message": "Verbessere diese Seite, indem du sie bearbeitest.",
+	"articlelists": "Neue Blogeinträge",
+	"ah-no-results": "Es wurden keine Seiten gefunden.",
+	"ah-popular-articles": "Beliebte Artikel",
+	"ah-new-articles": "Neue Artikel",
+	"ah-rss-feed": "RSS-Feed",
+	"ah-most-votes": "Meiste Stimmen (72 Stunden)",
+	"ah-what-talking-about": "Meiste Kommentare (72 Stunden)",
+	"blog-create-title": "Titel",
+	"blog-create-text": "Text",
+	"blog-create-categories": "Kategorien",
+	"blog-create-error-page-exists": "\"Fehler:\" Es gibt bereits einen Blog-Beitrag mit diesem Titel. Bitte wähle einen anderen Titel für deinen Beitrag.",
+	"blog-time-ago": "vor $1",
+	"blog-user-articles-title": "Blogs"
+}
